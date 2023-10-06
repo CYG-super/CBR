@@ -1,0 +1,650 @@
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+    <script src="//cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="//cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>基于案例推理的桥梁事故决策系统</title>
+
+    <!--Bootstrap Stylesheet [ REQUIRED ]-->
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="../static/images/logo.jpeg">
+    <!--Nifty Stylesheet [ REQUIRED ]-->
+    <link href="../static/css/nifty.min.css" rel="stylesheet">
+
+
+    <!--Nifty Premium Icon [ DEMONSTRATION ]-->
+    <link href="../static/css/nifty-demo-icons.min.css" rel="stylesheet">
+
+
+    <!--Demo [ DEMONSTRATION ]-->
+    <link href="../static/css/nifty-demo-icons.min.css" rel="stylesheet">
+    <link href="../static/css/nifty-demo.min.css" rel="stylesheet">
+    <link href="../static/css/font-awesome.min.css" rel="stylesheet">
+
+
+<!-- 引入样式 -->
+    <link rel="stylesheet" href="../static/element_ui/index.css">
+<!-- 引入组件库 -->
+    <script src="../static/element_ui/index.js"></script>
+    <!--JAVASCRIPT-->
+    <!--=================================================-->
+
+    <!--Pace - Page Load Progress Par [OPTIONAL]-->
+    <link href="../static/css/pace.min.css" rel="stylesheet">
+
+    <script src="../static/js/pace.min.js"></script>
+
+
+    <!--jQuery [ REQUIRED ]-->
+{#    <script src="../static/js/jquery-2.2.4.min.js"></script>#}
+
+
+    <!--BootstrapJS [ RECOMMENDED ]-->
+    <script src="../static/js/bootstrap.min.js"></script>
+
+
+    <!--NiftyJS [ RECOMMENDED ]-->
+    <script src="../static/js/nifty.min.js"></script>
+    <script src="../static/js/icons.js"></script>
+{#    <script src="../static/js/echarts.min.js"></script>#}
+    <script src="../static/js/tags.js"></script>
+
+
+
+    <!--=================================================-->
+
+    <!--Demo script [ DEMONSTRATION ]-->
+    <script src="../static/js/nifty-demo.min.js"></script>
+    <style type="text/css">
+    #tagsList {position:relative; width:250px; height:250px; }
+#tagsList a {position:absolute; top:0px; left:0px; font-family: Microsoft YaHei; color:gray; font-weight:bold; text-decoration:none; padding: 3px 6px; }
+#tagsList a:hover { color:#249e92; letter-spacing:2px;}
+#search:focus{
+    border: 1px solid #249e92;
+}
+    </style>
+
+     <style>
+		 table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+         .pagination-button {
+    margin: 5px;
+    padding: 5px 10px;
+    background-color: #eee;
+    border: none;
+    cursor: pointer;
+  }
+
+  .current-page {
+    background-color: #337ab7;
+    color: #fff;
+  }
+        </style>
+
+</head>
+
+<body>
+
+    <div id="container" class="effect aside-float aside-bright mainnav-lg">
+
+        <!--NAVBAR-->
+        <!--===================================================-->
+        <header id="navbar">
+            <div id="navbar-container" class="boxed">
+
+                <!--Brand logo & name-->
+                <!--================================-->
+                <div class="navbar-header">
+                    <a href="#" class="navbar-brand">
+                        <img src="../static/images/logo.jpeg" alt="Nifty Logo" class="brand-icon">
+                        <div class="brand-title">
+                            <span class="brand-text">蔡永刚毕设</span>
+                        </div>
+                    </a>
+                </div>
+                <!--================================-->
+                <!--End brand logo & name-->
+
+
+                <!--Navbar Dropdown-->
+                <!--================================-->
+                <div class="navbar-content clearfix">
+                    <ul class="nav navbar-top-links pull-left">
+
+                        <!--Navigation toogle button-->
+                        <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                        <li class="tgl-menu-btn">
+                            <a class="mainnav-toggle" href="#">
+                                <i class="demo-pli-view-list"></i>
+                            </a>
+                        </li>
+
+                    </ul>
+                    <ul class="nav navbar-top-links pull-left">
+
+                        <h4>基于案例推理的桥梁事故决策系统</h4>
+
+                    </ul>
+                </div>
+                <!--================================-->
+                <!--End Navbar Dropdown-->
+
+            </div>
+        </header>
+        <!--===================================================-->
+        <!--END NAVBAR-->
+
+        <div class="boxed">
+
+            <!--CONTENT CONTAINER-->
+            <!--===================================================-->
+            <div id="content-container">
+
+                <!--Page content-->
+                <!--===================================================-->
+                <div id="page-content">
+
+					<h4 class="text-main pad-btm bord-btm">案例库查看</h4>
+
+                </div>
+                <div><div>
+                    <button type="submit" class="btn btn-primary btn-lg" style="margin-left: 550px" onclick="fetchData1()">案例基本信息查看</button>
+                    <button type="submit" class="btn btn-default btn-lg"  onclick="toggleTable1()">隐藏/显示</button>
+
+                    <div id="result_div1" style="display: none;margin: 0 100px;color: black">
+                    <h2>查看案例基本节点信息:</h2>
+                    <table id="result_table1">
+                        <tr>
+                              <th>事故名称</th>
+                              <th>桥梁结构</th>
+                              <th>桥梁材料</th>
+                              <th>事故发生部位</th>
+                              <th>事故发生季节</th>
+                              <th>事故发生时段</th>
+                              <th>事故发生区域</th>
+                              <th>事故发生地点</th>
+                              <th>事故发生地区级别</th>
+                              <th>事故分类</th>
+                              <th>事故原因</th>
+                              <th>事故严重程度</th>
+                        </tr>
+                    </table>
+                        <div id="pagination1"></div>
+                </div>
+                        </div>
+                    <br>
+
+{#                      <h1>案例详细信息</h1>#}
+{#                      <button id="btn-detailed-info">案例详细信息查看</button>#}
+                       <div>
+                    <button type="submit" class="btn btn-primary btn-lg" style="margin-left: 550px" onclick="fetchData2()">案例详细信息查看</button>
+                    <button type="submit" class="btn btn-default btn-lg"  onclick="toggleTable2()">隐藏/显示</button>
+
+
+                    <div id="result_div2" style="display: none;margin: 0 100px;color: black">
+                    <h2>查看案例相关属性信息:</h2>
+                    <table id="result_table2">
+                        <tr>
+                                <th>事故名称</th>
+                                <th>事故具体时间</th>
+                                <th>事故具体地点</th>
+                                <th>事故响应措施</th>
+                                <th>事故响应链</th>
+
+                        </tr>
+                    </table>
+                        <div id="pagination"></div>
+                </div>
+
+                        </div>
+                </div>
+
+
+
+            </div>
+            <!--===================================================-->
+            <!--END CONTENT CONTAINER-->
+
+
+            <!--MAIN NAVIGATION-->
+            <!--===================================================-->
+            <nav id="mainnav-container">
+                <div id="mainnav">
+
+                    <!--Menu-->
+                    <!--================================-->
+                    <div id="mainnav-menu-wrap">
+                        <div class="nano">
+                            <div class="nano-content" style="width: 241px">
+
+                                <ul id="mainnav-menu" class="list-group">
+
+                                    <li class="list-header"> 系统概述</li>
+                                    <li>
+                                        <a href="{{ url_for('introduction') }}">
+                                            <i class="fa fa-file-text" style="width:24px"></i>
+                                            <span class="menu-title">
+                                                <span>桥梁事故案例推理系统简介</span>
+                                            </span>
+
+                                        </a>
+
+
+                                    </li>
+
+
+
+                                    <!--Category name-->
+						            <li class="list-header"> 桥梁事故案例可视化</li>
+
+                                    <!--Menu list item-->
+
+
+                                    <!--Menu list item-->
+                                   <li>
+                                        <a href="{{ url_for('search') }}">
+                                            <i class="fa fa-search" style="width:24px"></i>
+                                            <span class="menu-title">
+                                                <span>精确检索桥梁事故案例</span>
+                                            </span>
+
+                                        </a>
+
+
+                                    </li>
+                                    <li>
+                                        <a href="{{ url_for('get_all_relation') }}">
+                                            <i class="fa fa-pie-chart" style="width:24px"></i>
+                                            <span class="menu-title">
+                                                <span>桥梁事故案例知识图谱概览</span>
+                                            </span>
+
+                                        </a>
+
+                                    </li>
+                                    <!--Menu list item-->
+
+
+
+						            <li class="list-divider"></li>
+
+						            <!--Category name-->
+						            <li class="list-header">桥梁运营事故案例推理系统</li>
+
+						            <!--Menu list item-->
+						            <li >
+						                <a href="{{ url_for('case') }}">
+						                    <i class="fa fa-list" style="width:24px"></i>
+						                    <span class="menu-title">案例库查看</span>
+
+						                </a>
+
+
+						            </li>
+                                    <li >
+						                <a href="{{ url_for('add') }}">
+						                    <i class="fa fa-plus-circle" style="width:24px"></i>
+						                    <span class="menu-title">新增事故案例</span>
+
+						                </a>
+
+
+						            </li>
+                                    <li >
+						                <a href="{{ url_for('find') }}">
+						                    <i class="fa fa-search-plus" style="width:24px"></i>
+						                    <span class="menu-title">相似案例检索辅助决策</span>
+
+						                </a>
+
+
+						            </li>
+                                    <li >
+						                <a href="{{ url_for('solution') }}">
+						                    <i class="fa fa-user-plus" style="width:24px"></i>
+						                    <span class="menu-title">案例重用</span>
+
+						                </a>
+
+
+						            </li>
+
+
+</ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!--================================-->
+                    <!--End menu-->
+
+                </div>
+            </nav>
+            <!--===================================================-->
+            <!--END MAIN NAVIGATION-->
+
+        </div>
+
+        <!-- FOOTER -->
+        <!--===================================================-->
+        <footer id="footer">
+
+           <p class="pad-lft">Copyright&#0169; 2023 蔡永刚  &nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;All Rights Reserved </p>
+
+        </footer>
+        <!--===================================================-->
+        <!-- END FOOTER -->
+
+        <!-- SCROLL PAGE BUTTON -->
+        <!--===================================================-->
+        <button class="scroll-top btn">
+            <i class="pci-chevron chevron-up"></i>
+        </button>
+        <!--===================================================-->
+    </div>
+  <script>
+
+    function toggleTable1() {
+    const resultDiv = document.getElementById('result_div1');
+    if (resultDiv.style.display === 'none') {
+      resultDiv.style.display = 'block';
+    } else {
+      resultDiv.style.display = 'none';
+    }
+  }
+    function toggleTable2() {
+    const resultDiv = document.getElementById('result_div2');
+    if (resultDiv.style.display === 'none') {
+      resultDiv.style.display = 'block';
+    } else {
+      resultDiv.style.display = 'none';
+    }
+  }
+     let currentPage1 = 1;
+  const itemsPerPage1 = 10; // 每页显示的数据数量
+
+  function fetchData1() {
+    fetch('/case/basic-info')  // 发起请求到后端的路由 '/get_data'
+      .then(response => response.json())
+      .then(data => {
+        const resultTable = document.getElementById('result_table1');
+        resultTable.innerHTML = '';  // 清空表格内容
+
+        const startIndex = (currentPage1 - 1) * itemsPerPage1;
+        const endIndex = startIndex + itemsPerPage1;
+        const currentData = data.slice(startIndex, endIndex);
+
+        // 添加表头
+        const headerRow = document.createElement('tr');
+        const nameHeader = document.createElement('th');
+        const structureHeader = document.createElement('th');
+        const materialHeader = document.createElement('th');
+        const locationHeader = document.createElement('th');
+        const seasonHeader = document.createElement('th');
+        const timeHeader = document.createElement('th');
+        const regionHeader = document.createElement('th');
+        const siteHeader = document.createElement('th');
+        const area_levelHeader = document.createElement('th');
+        const categoryHeader = document.createElement('th');
+        const reasonHeader = document.createElement('th');
+        const severityHeader = document.createElement('th');
+
+        nameHeader.textContent = '事故名称';
+        structureHeader.textContent = '桥梁结构';
+        materialHeader.textContent = '桥梁材料';
+        locationHeader.textContent = '事故发生部位';
+        seasonHeader.textContent = '事故发生季节';
+        timeHeader.textContent = '事故发生时段';
+        regionHeader.textContent = '事故发生区域';
+        siteHeader.textContent = '事故发生地点';
+        area_levelHeader.textContent = '事故发生地区级别';
+        categoryHeader.textContent = '事故分类';
+        reasonHeader.textContent = '事故原因';
+        severityHeader.textContent = '事故严重程度';
+
+        headerRow.appendChild(nameHeader);
+        headerRow.appendChild(structureHeader);
+        headerRow.appendChild(materialHeader);
+        headerRow.appendChild(locationHeader);
+        headerRow.appendChild(seasonHeader);
+        headerRow.appendChild(timeHeader);
+        headerRow.appendChild(regionHeader);
+        headerRow.appendChild(siteHeader);
+        headerRow.appendChild(area_levelHeader);
+        headerRow.appendChild(categoryHeader);
+        headerRow.appendChild(reasonHeader);
+        headerRow.appendChild(severityHeader);
+        resultTable.appendChild(headerRow);
+
+        currentData.forEach(item => {
+          const row = document.createElement('tr');
+          const nameCell = document.createElement('td');
+          const structureCell = document.createElement('td');
+          const materialCell = document.createElement('td');
+          const locationCell = document.createElement('td');
+          const seasonCell = document.createElement('td');
+          const timeCell = document.createElement('td');
+          const regionCell = document.createElement('td');
+          const siteCell = document.createElement('td');
+          const areaCell = document.createElement('td');
+          const categoryCell = document.createElement('td');
+          const reasonCell = document.createElement('td');
+          const severityCell = document.createElement('td');
+
+          nameCell.textContent = item['事故名称'];
+          structureCell.textContent = item['桥梁结构'];
+          materialCell.textContent = item['桥梁材料'];
+          locationCell.textContent = item['事故发生部位'];
+          seasonCell.textContent = item['事故发生季节'];
+          timeCell.textContent = item['事故发生时段'];
+          regionCell.textContent = item['事故发生区域'];
+          siteCell.textContent = item['事故发生地点'];
+          areaCell.textContent = item['事故发生地区级别'];
+          categoryCell.textContent = item['事故分类'];
+          reasonCell.textContent = item['事故原因'];
+          severityCell.textContent = item['事故严重程度'];
+
+          row.appendChild(nameCell);
+          row.appendChild(structureCell);
+          row.appendChild(materialCell);
+          row.appendChild(locationCell);
+          row.appendChild(seasonCell);
+          row.appendChild(timeCell);
+          row.appendChild(regionCell);
+          row.appendChild(siteCell);
+          row.appendChild(areaCell);
+          row.appendChild(categoryCell);
+          row.appendChild(reasonCell);
+          row.appendChild(severityCell);
+          resultTable.appendChild(row);
+        });
+
+        const resultDiv = document.getElementById('result_div1');
+        resultDiv.style.display = 'block';
+
+        renderPagination1(data.length); // 更新分页控件
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+  }
+
+  function renderPagination1(totalItems) {
+    const totalPages = Math.ceil(totalItems / itemsPerPage1);
+    const paginationDiv = document.getElementById('pagination1');
+    paginationDiv.innerHTML = '';
+
+    const prevButton = document.createElement('button');
+    prevButton.textContent = '上一页';
+    prevButton.className = 'pagination-button';
+    prevButton.addEventListener('click', () => {
+      if (currentPage1 > 1) {
+        currentPage1--;
+        fetchData1();
+      }
+    });
+    paginationDiv.appendChild(prevButton);
+
+    for (let i = 1; i <= totalPages; i++) {
+      const pageButton = document.createElement('button');
+      pageButton.textContent = i;
+      pageButton.className = 'pagination-button';
+      if (i === currentPage1) {
+        pageButton.classList.add('current-page');
+      }
+      pageButton.addEventListener('click', () => {
+        currentPage1 = i;
+        fetchData1();
+      });
+      paginationDiv.appendChild(pageButton);
+    }
+
+    const nextButton = document.createElement('button');
+    nextButton.textContent = '下一页';
+    nextButton.className = 'pagination-button';
+    nextButton.addEventListener('click', () => {
+      if (currentPage1 < totalPages) {
+        currentPage1++;
+        fetchData1();
+      }
+    });
+    paginationDiv.appendChild(nextButton);
+  }
+
+
+   let currentPage = 1;
+  const itemsPerPage = 10; // 每页显示的数据数量
+
+    function fetchData2() {
+    fetch('/case/detailed-info')  // 发起请求到后端的路由 '/get_data'
+      .then(response => response.json())
+      .then(data => {
+        const resultTable = document.getElementById('result_table2');
+        resultTable.innerHTML = '';  // 清空表格内容
+
+        const startIndex = (currentPage - 1) * itemsPerPage;
+        const endIndex = startIndex + itemsPerPage;
+        const currentData = data.slice(startIndex, endIndex);
+
+        // 添加表头
+        const headerRow = document.createElement('tr');
+        const nameHeader = document.createElement('th');
+        const timeHeader = document.createElement('th');
+        const pleaceHeader = document.createElement('th');
+        const solutionHeader = document.createElement('th');
+        const solutionchainHeader = document.createElement('th');
+
+        nameHeader.textContent = '事故名称';
+        timeHeader.textContent = '事故具体时间';
+        pleaceHeader.textContent = '事故具体地点';
+        solutionHeader.textContent = '事故响应措施';
+        solutionchainHeader.textContent = '事故响应链';
+
+        headerRow.appendChild(nameHeader);
+        headerRow.appendChild(timeHeader);
+        headerRow.appendChild(pleaceHeader);
+        headerRow.appendChild(solutionHeader);
+        headerRow.appendChild(solutionchainHeader);
+        resultTable.appendChild(headerRow);
+
+        // 添加数据行
+        currentData.forEach(item => {
+          const row = document.createElement('tr');
+          const nameCell = document.createElement('td');
+          const timeCell = document.createElement('td');
+          const pleaceCell = document.createElement('td');
+          const solutionCell = document.createElement('td');
+          const solutionchainCell = document.createElement('td');
+
+          nameCell.textContent = item['事故名称'];
+          timeCell.textContent = item['事故具体时间'];
+          pleaceCell.textContent = item['事故具体地点'];
+          solutionCell.textContent = item['事故响应措施'];
+          solutionchainCell.textContent = item['事故响应链'];
+
+          row.appendChild(nameCell);
+          row.appendChild(timeCell);
+          row.appendChild(pleaceCell);
+          row.appendChild(solutionCell);
+          row.appendChild(solutionchainCell);
+          resultTable.appendChild(row);
+        });
+
+        // 显示结果区域
+        const resultDiv = document.getElementById('result_div2');
+        resultDiv.style.display = 'block';
+
+        // 更新分页控件
+        renderPagination(data.length);
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+  }
+
+    function renderPagination(totalItems) {
+    const totalPages = Math.ceil(totalItems / itemsPerPage);
+    const paginationDiv = document.getElementById('pagination');
+    paginationDiv.innerHTML = '';
+
+    // 添加上一页按钮
+    const prevButton = document.createElement('button');
+    prevButton.textContent = '上一页';
+    prevButton.className = 'pagination-button';
+    prevButton.addEventListener('click', () => {
+      if (currentPage > 1) {
+        currentPage--;
+        fetchData2();
+      }
+    });
+    paginationDiv.appendChild(prevButton);
+
+    // 添加页码按钮
+    for (let i = 1; i <= totalPages; i++) {
+      const pageButton = document.createElement('button');
+      pageButton.textContent = i;
+      pageButton.className = 'pagination-button';
+      if (i === currentPage) {
+        pageButton.classList.add('current-page');
+      }
+      pageButton.addEventListener('click', () => {
+        currentPage = i;
+        fetchData2();
+      });
+      paginationDiv.appendChild(pageButton);
+    }
+
+    // 添加下一页按钮
+    const nextButton = document.createElement('button');
+    nextButton.textContent = '下一页';
+    nextButton.className = 'pagination-button';
+    nextButton.addEventListener('click', () => {
+      if (currentPage < totalPages) {
+        currentPage++;
+        fetchData2();
+      }
+    });
+    paginationDiv.appendChild(nextButton);
+  }
+
+  // 初始加载数据和分页控件
+  {#fetchData2();#}
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,326 @@
+{#<!DOCTYPE html>#}
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>基于案例推理的桥梁事故决策系统</title>
+
+    <!--Bootstrap Stylesheet [ REQUIRED ]-->
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="../static/images/logo.jpeg">
+    <!--Nifty Stylesheet [ REQUIRED ]-->
+    <link href="../static/css/nifty.min.css" rel="stylesheet">
+
+
+    <!--Nifty Premium Icon [ DEMONSTRATION ]-->
+    <link href="../static/css/nifty-demo-icons.min.css" rel="stylesheet">
+
+
+    <!--Demo [ DEMONSTRATION ]-->
+    <link href="../static/css/nifty-demo-icons.min.css" rel="stylesheet">
+    <link href="../static/css/nifty-demo.min.css" rel="stylesheet">
+    <link href="../static/css/font-awesome.min.css" rel="stylesheet">
+
+        
+    
+    <!--JAVASCRIPT-->
+    <!--=================================================-->
+
+    <!--Pace - Page Load Progress Par [OPTIONAL]-->
+    <link href="../static/css/pace.min.css" rel="stylesheet">
+   
+    <script src="../static/js/pace.min.js"></script>
+
+
+    <!--jQuery [ REQUIRED ]-->
+    <script src="../static/js/jquery-2.2.4.min.js"></script>
+
+
+    <!--BootstrapJS [ RECOMMENDED ]-->
+    <script src="../static/js/bootstrap.min.js"></script>
+
+
+    <!--NiftyJS [ RECOMMENDED ]-->
+    <script src="../static/js/nifty.min.js"></script>
+    <script src="../static/js/icons.js"></script>
+    <script src="../static/js/echarts.min.js"></script>
+    <script src="../static/js/tags.js"></script>
+
+
+
+    <!--=================================================-->
+    
+    <!--Demo script [ DEMONSTRATION ]-->
+    <script src="../static/js/nifty-demo.min.js"></script>
+    <style type="text/css"> 
+    #tagsList {position:relative; width:250px; height:250px; }
+#tagsList a {position:absolute; top:0px; left:0px; font-family: Microsoft YaHei; color:gray; font-weight:bold; text-decoration:none; padding: 3px 6px; }
+#tagsList a:hover { color:#249e92; letter-spacing:2px;}
+#search:focus{
+    border: 1px solid #249e92;
+}
+        .module {
+      display: inline-block;
+      margin: 20px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      text-align: center;
+      cursor: pointer;
+    }
+        .module-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+    </style>
+
+</head>
+
+<body>
+
+    <div id="container" class="effect aside-float aside-bright mainnav-lg">
+        
+        <!--NAVBAR-->
+        <!--===================================================-->
+        <header id="navbar">
+            <div id="navbar-container" class="boxed">
+
+                <!--Brand logo & name-->
+                <!--================================-->
+                <div class="navbar-header">
+                    <a href="#" class="navbar-brand">
+                        <img src="../static/images/logo.jpeg" alt="Nifty Logo" class="brand-icon">
+                        <div class="brand-title">
+                            <span class="brand-text">蔡永刚毕设</span>
+                        </div>
+                    </a>
+                </div>
+                <!--================================-->
+                <!--End brand logo & name-->
+
+
+                <!--Navbar Dropdown-->
+                <!--================================-->
+                <div class="navbar-content clearfix">
+                    <ul class="nav navbar-top-links pull-left">
+
+                        <!--Navigation toogle button-->
+                        <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                        <li class="tgl-menu-btn">
+                            <a class="mainnav-toggle" href="#">
+                                <i class="demo-pli-view-list"></i>
+                            </a>
+                        </li>
+                        
+                    </ul>
+                    <ul class="nav navbar-top-links pull-left">
+
+                        <h4>基于案例推理的桥梁事故决策系统</h4>
+                        
+                    </ul>
+                </div>
+
+
+                <!--================================-->
+                <!--End Navbar Dropdown-->
+
+            </div>
+        </header>
+        <!--===================================================-->
+        <!--END NAVBAR-->
+
+        <div class="boxed">
+
+            <!--CONTENT CONTAINER-->
+            <!--===================================================-->
+            <div id="content-container">
+
+                <!--Page content-->
+                <!--===================================================-->
+                <div id="page-content">
+                    
+					<h4 class="text-main pad-btm bord-btm">系统简介</h4>
+                
+
+                  <p>&emsp;&emsp;本系统分为知识图谱模块和案例推理模块，可以为桥梁事故的决策者提供决策参考</p>
+                  <p>&emsp;&emsp;在知识图谱模块中，系统以图的形式展示桥梁运营事故案例，从而提供了一种直观的方式来查看事故信息。通过知识图谱的可视化呈现，
+                      用户可以更清晰地了解桥梁运营事故案例之间的关联和信息流动。此模块旨在帮助用户全面把握事故案例的背景、原因和后果，从而更好地分析和理解事故的特征和规律。</p>
+                    <p>&emsp;&emsp;案例推理模块具有以下主要功能：通过对相似案例的查找和分析，为新的桥梁运营事故案例提供参考决策信息。该模块通过对已有案例的特征、原因和结果进行比较和匹配，能够找到与新案例相似的历史案例。
+                        通过对相似案例的借鉴和推理，系统可以为用户提供相关的决策建议和解决方案。这样，用户在面对新的桥梁运营事故时可以更加准确地评估风险、制定应对策略，并采取适当的措施来减少潜在的损失。</p>
+
+                 <div class="module-container">
+                  <div class="module">
+                    <h2>知识图谱模块</h2>
+                    <a href="#">
+                      <img src="{{ url_for('static', filename='images/KG1.png') }}" alt="知识图谱模块" style="width: 600px;height: 480px">
+                    </a>
+                    <p></p>
+                    <p>此模块提供桥梁运营事故知识图谱可视化相关内容</p>
+                    <p>提供对桥梁运营事故案例的精准查找：<a href="{{ url_for('search') }}">点击进入相关功能</a></p>
+                    <p>提供对桥梁运营事故案例库知识图谱的概览：<a href="{{ url_for('get_all_relation') }}">点击进入相关功能</a></p>
+                  </div>
+
+                  <div class="module">
+                    <h2>案例推理模块</h2>
+                    <a href="#">
+                      <img src="{{ url_for('static', filename='images/bridge.png') }}" alt="案例推理模块" style="width: 600px;height: 480px">
+                    </a>
+                    <p></p>
+                    <p>此模块提供桥梁运营事故案例推理相关内容</p>
+                    <p>案例库查看模块可以查看案例所有的信息：<a href="{{ url_for('case') }}">点击进入相关功能</a></p>
+                    <p>案例新增模块提供新增案例到案例库：<a href="{{ url_for('add') }}">点击进入相关功能</a></p>
+                    <p>相似案例检索模块查找相似案例：<a href="{{ url_for('find') }}">点击进入相关功能</a></p>
+                    <p>案例重用模块生成决策方案：<a href="{{ url_for('solution') }}">点击进入相关功能</a></p>
+                  </div>
+                </div>
+
+					
+                </div>
+                <!--===================================================-->
+                <!--End page content-->
+
+
+            </div>
+            <!--===================================================-->
+            <!--END CONTENT CONTAINER-->
+
+            
+            <!--MAIN NAVIGATION-->
+            <!--===================================================-->
+            <nav id="mainnav-container">
+                <div id="mainnav">
+
+                    <!--Menu-->
+                    <!--================================-->
+                    <div id="mainnav-menu-wrap">
+                        <div class="nano">
+                            <div class="nano-content" style="width: 241px">
+
+                                <ul id="mainnav-menu" class="list-group">
+
+                                    <li class="list-header"> 系统概述</li>
+                                    <li>
+                                        <a href="{{ url_for('introduction') }}">
+                                            <i class="fa fa-file-text" style="width:24px"></i>
+                                            <span class="menu-title">
+                                                <span>桥梁事故案例推理系统简介</span>
+                                            </span>
+
+                                        </a>
+
+
+                                    </li>
+						
+						            
+                                  
+                                    <!--Category name-->
+						            <li class="list-header"> 桥梁事故案例可视化</li>
+                        
+                                    <!--Menu list item-->
+                                    
+                        
+                                    <!--Menu list item-->
+                                   <li>
+                                        <a href="{{ url_for('search') }}">
+                                            <i class="fa fa-search" style="width:24px"></i>
+                                            <span class="menu-title">
+                                                <span>精确检索桥梁事故案例</span>
+                                            </span>
+                                            
+                                        </a>
+                        
+                                        
+                                    </li>
+                                    <li>
+                                        <a href="{{ url_for('get_all_relation') }}">
+                                            <i class="fa fa-pie-chart" style="width:24px"></i>
+                                            <span class="menu-title">
+                                                <span>桥梁事故案例知识图谱概览</span>
+                                            </span>
+                                            
+                                        </a>
+                        
+                                    </li>
+                                    <!--Menu list item-->
+                                   
+						          
+                                   
+						            <li class="list-divider"></li>
+						
+						            <!--Category name-->
+						            <li class="list-header">桥梁运营事故案例推理系统</li>
+						
+						            <!--Menu list item-->
+						            <li >
+						                <a href="{{ url_for('case') }}">
+						                    <i class="fa fa-list" style="width:24px"></i>
+						                    <span class="menu-title">案例库查看</span>
+											
+						                </a>
+						
+						                
+						            </li>
+                                    <li >
+						                <a href="{{ url_for('add') }}">
+						                    <i class="fa fa-plus-circle" style="width:24px"></i>
+						                    <span class="menu-title">新增事故案例</span>
+
+						                </a>
+
+
+						            </li>
+                                    <li >
+						                <a href="{{ url_for('find') }}">
+						                    <i class="fa fa-search-plus" style="width:24px"></i>
+						                    <span class="menu-title">相似案例检索辅助决策</span>
+
+						                </a>
+
+
+						            </li>
+                                    <li >
+						                <a href="{{ url_for('solution') }}">
+						                    <i class="fa fa-user-plus" style="width:24px"></i>
+						                    <span class="menu-title">案例重用</span>
+
+						                </a>
+
+
+						            </li>
+
+                                </ul>
+
+
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <!--================================-->
+                    <!--End menu-->
+
+                </div>
+            </nav>
+            <!--===================================================-->
+            <!--END MAIN NAVIGATION-->
+
+        </div>
+
+        <!-- FOOTER -->
+        <!--===================================================-->
+        <footer id="footer">
+
+           <p class="pad-lft">Copyright&#0169; 2023 蔡永刚  &nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;All Rights Reserved </p>
+
+        </footer>
+        <!--===================================================-->
+        <!-- END FOOTER -->
+
+        <!-- SCROLL PAGE BUTTON -->
+        <!--===================================================-->
+        <button class="scroll-top btn">
+            <i class="pci-chevron chevron-up"></i>
+        </button>
+        <!--===================================================-->
+    </div>

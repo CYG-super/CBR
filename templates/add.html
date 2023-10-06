@@ -1,0 +1,538 @@
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>基于案例推理的桥梁事故决策系统</title>
+
+    <!--Bootstrap Stylesheet [ REQUIRED ]-->
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="../static/images/logo.jpeg">
+    <!--Nifty Stylesheet [ REQUIRED ]-->
+    <link href="../static/css/nifty.min.css" rel="stylesheet">
+
+
+    <!--Nifty Premium Icon [ DEMONSTRATION ]-->
+    <link href="../static/css/nifty-demo-icons.min.css" rel="stylesheet">
+
+
+    <!--Demo [ DEMONSTRATION ]-->
+    <link href="../static/css/nifty-demo-icons.min.css" rel="stylesheet">
+    <link href="../static/css/nifty-demo.min.css" rel="stylesheet">
+    <link href="../static/css/font-awesome.min.css" rel="stylesheet">
+
+
+
+    <!--JAVASCRIPT-->
+    <!--=================================================-->
+
+    <!--Pace - Page Load Progress Par [OPTIONAL]-->
+    <link href="../static/css/pace.min.css" rel="stylesheet">
+
+    <script src="../static/js/pace.min.js"></script>
+
+
+    <!--jQuery [ REQUIRED ]-->
+    <script src="../static/js/jquery-2.2.4.min.js"></script>
+
+
+    <!--BootstrapJS [ RECOMMENDED ]-->
+    <script src="../static/js/bootstrap.min.js"></script>
+
+
+    <!--NiftyJS [ RECOMMENDED ]-->
+    <script src="../static/js/nifty.min.js"></script>
+    <script src="../static/js/icons.js"></script>
+    <script src="../static/js/echarts.min.js"></script>
+    <script src="../static/js/tags.js"></script>
+<script>
+function submitForm() {
+    // 表单提交逻辑
+
+    // 显示成功提示信息
+    document.getElementById('success-message').style.display = 'block';
+}
+</script>
+
+
+    <!--=================================================-->
+
+    <!--Demo script [ DEMONSTRATION ]-->
+    <script src="../static/js/nifty-demo.min.js"></script>
+    <style type="text/css">
+    #tagsList {position:relative; width:250px; height:250px; }
+#tagsList a {position:absolute; top:0px; left:0px; font-family: Microsoft YaHei; color:gray; font-weight:bold; text-decoration:none; padding: 3px 6px; }
+#tagsList a:hover { color:#249e92; letter-spacing:2px;}
+#search:focus{
+    border: 1px solid #249e92;
+}
+    </style>
+
+</head>
+
+<body>
+
+    <div id="container" class="effect aside-float aside-bright mainnav-lg">
+
+        <!--NAVBAR-->
+        <!--===================================================-->
+        <header id="navbar">
+            <div id="navbar-container" class="boxed">
+
+                <!--Brand logo & name-->
+                <!--================================-->
+                <div class="navbar-header">
+                    <a href="#" class="navbar-brand">
+                        <img src="../static/images/logo.jpeg" alt="Nifty Logo" class="brand-icon">
+                        <div class="brand-title">
+                            <span class="brand-text">蔡永刚毕设</span>
+                        </div>
+                    </a>
+                </div>
+                <!--================================-->
+                <!--End brand logo & name-->
+
+
+                <!--Navbar Dropdown-->
+                <!--================================-->
+                <div class="navbar-content clearfix">
+                    <ul class="nav navbar-top-links pull-left">
+
+                        <!--Navigation toogle button-->
+                        <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                        <li class="tgl-menu-btn">
+                            <a class="mainnav-toggle" href="#">
+                                <i class="demo-pli-view-list"></i>
+                            </a>
+                        </li>
+
+                    </ul>
+                    <ul class="nav navbar-top-links pull-left">
+
+                        <h4>基于案例推理的桥梁事故决策系统</h4>
+
+                    </ul>
+                </div>
+                <!--================================-->
+                <!--End Navbar Dropdown-->
+
+            </div>
+        </header>
+        <!--===================================================-->
+        <!--END NAVBAR-->
+
+        <div class="boxed">
+
+            <!--CONTENT CONTAINER-->
+            <!--===================================================-->
+            <div id="content-container">
+
+                <!--Page content-->
+                <!--===================================================-->
+                <div id="page-content">
+
+					<h4 class="text-main pad-btm bord-btm">新增事故案例</h4>
+
+                </div>
+               <div id="content" style="height:1200px;width:950px;float:left;margin-left: 50px;margin-top: 10px">
+                   <form class="form-horizontal" id="myForm" action="/add/submit_form" method="POST">
+                      <div class="form-group form-group-lg">
+                        <label class="col-sm-2 control-label" for="event_name">新增案例名称</label>
+                        <div class="col-sm-5">
+                          <input class="form-control" type="text" name="event_name" placeholder="请输入案例名称">
+                        </div>
+                      </div>
+                                           <!-- 桥梁结构 -->
+                        <div class="form-group form-group-lg">
+                            <label class="col-sm-2 control-label" for="bridge_structure">桥梁结构</label>
+                            <div class="col-sm-5">
+                                <select class="form-control" id="bridge_structure" name="bridge_structure">
+                                    <option value="梁式桥">梁式桥</option>
+                                    <option value="拱式桥">拱式桥</option>
+                                    <option value="悬索桥">悬索桥</option>
+                                    <option value="组合体系桥">组合体系桥</option>
+                                    <option value="浮桥">浮桥</option>
+                                    <option value="刚架桥">刚架桥</option>
+                                </select>
+                            </div>
+                        </div>
+                        <!-- 桥梁材料 -->
+                        <div class="form-group form-group-lg">
+                            <label class="col-sm-2 control-label" for="bridge_material">桥梁材料</label>
+                            <div class="col-sm-5">
+                                <select class="form-control" id="bridge_material" name="bridge_material">
+                                    <option value="钢筋混凝土桥">钢筋混凝土桥</option>
+                                    <option value="圬工桥">圬工桥</option>
+                                    <option value="木桥">木桥</option>
+                                    <option value="钢桥">钢桥</option>
+                                    <option value="预应力混凝土桥">预应力混凝土桥</option>
+                                    <option value="索桥">索桥</option>
+                                    <option value="混合桥">混合桥</option>
+                                    <option value="复合材料桥">复合材料桥</option>
+                                </select>
+                            </div>
+                        </div>
+                       <div class="form-group form-group-lg">
+                        <label class="col-sm-2 control-label" for="accident_location">事故发生部位</label>
+                        <div class="col-sm-5">
+                            <select class="form-control" id="accident_location" name="accident_location">
+                                <option value="桥面">桥面</option>
+                                <option value="桥墩">桥墩</option>
+                                <option value="桥索">桥索</option>
+                                <option value="桥底">桥底</option>
+                                <option value="吊杆">吊杆</option>
+                                <option value="承重梁">承重梁</option>
+                                <option value="桥拱">桥拱</option>
+                                <option value="桥台">桥台</option>
+                                <option value="桥面箱梁">桥面箱梁</option>
+                                <option value="桥梁附属结构物">桥梁附属结构物</option>
+                                <option value="除以上部位之外的桥面上其他部位">桥面上其他部位</option>
+                                <option value="除以上部分之外的桥面下其他部位">桥面下其他部位</option>
+                            </select>
+                        </div>
+                      </div>
+                       <div class="form-group form-group-lg">
+                        <label class="col-sm-2 control-label" for="accident_season">事故发生季节</label>
+                        <div class="col-sm-5">
+                            <select class="form-control" id="accident_season" name="accident_season">
+                                <option value="春">春</option>
+                                <option value="夏">夏</option>
+                                <option value="秋">秋</option>
+                                <option value="冬">冬</option>
+                            </select>
+                        </div>
+                      </div>
+                       <div class="form-group form-group-lg">
+                        <label class="col-sm-2 control-label" for="accident_time">事故发生时段</label>
+                        <div class="col-sm-5">
+                            <select class="form-control" id="accident_time" name="accident_time">
+                                <option value="凌晨 (00:00—5:00)">凌晨 (00:00—5:00)</option>
+                                <option value="清晨 (5:00-6:00)">清晨 (5:00-6:00)</option>
+                                <option value="早晨 (6:00-8:00)">早晨 (6:00-8:00)</option>
+                                <option value="上午 (8:00—11:00)">上午 (8:00—11:00)</option>
+                                <option value="中午 (11:00—13:00)">中午 (11:00—13:00)</option>
+                                <option value="下午 (13:00—17:00)">下午 (13:00—17:00)</option>
+                                <option value="傍晚 (17:00—18:00)">傍晚 (17:00—18:00)</option>
+                                <option value="晚上 (18:00—24:00)">晚上 (18:00—24:00)</option>
+                            </select>
+                        </div>
+                      </div>
+                       <div class="form-group form-group-lg">
+                        <label class="col-sm-2 control-label" for="accident_region">事故发生区域</label>
+                        <div class="col-sm-5">
+                            <select class="form-control" id="accident_region" name="accident_region">
+                                 <option value="东北区域">东北区域</option>
+                                <option value="华北区域">华北区域</option>
+                                <option value="华东区域">华东区域</option>
+                                <option value="华南区域">华南区域</option>
+                                <option value="华中区域">华中区域</option>
+                                <option value="西北区域">西北区域</option>
+                                <option value="西南区域">西南区域</option>
+                            </select>
+                        </div>
+                      </div>
+                       <div class="form-group form-group-lg">
+                        <label class="col-sm-2 control-label" for="accident_site">事故发生地点</label>
+                        <div class="col-sm-5">
+                          <input class="form-control" type="text" id="accident_site" name="accident_site" placeholder="请输入事故发生地点（省-市）">
+                        </div>
+                      </div>
+                       <div class="form-group form-group-lg">
+                        <label class="col-sm-2 control-label" for="accident_area_level">事故发生地区级别</label>
+                        <div class="col-sm-5">
+                            <select class="form-control" id="accident_area_level" name="accident_area_level">
+                                 <option value="乡镇">乡镇</option>
+                                <option value="地级市">地级市</option>
+                                <option value="直辖市">直辖市</option>
+                                <option value="县级市">县级市</option>
+                                <option value="省会城市">省会城市</option>
+                            </select>
+                        </div>
+                      </div>
+                       <div class="form-group form-group-lg">
+                        <label class="col-sm-2 control-label" for="incident_category">事故分类</label>
+                        <div class="col-sm-5">
+                            <select class="form-control" id="incident_category" name="incident_category">
+                                <option value="碰撞事故">碰撞事故</option>
+                                <option value="水利事故">水利事故</option>
+                                <option value="疲劳事故">疲劳事故</option>
+                                <option value="过载事故">过载事故</option>
+                                <option value="地震事故">地震事故</option>
+                                <option value="意外事故">意外事故</option>
+                                <option value="设计事故">设计事故</option>
+                                <option value="腐蚀事故">腐蚀事故</option>
+                                <option value="火灾事故">火灾事故</option>
+                                <option value="质量问题">质量问题</option>
+                                <option value="其他事故">其他事故</option>
+                            </select>
+                        </div>
+                      </div>
+                       <div class="form-group form-group-lg">
+                        <label class="col-sm-2 control-label" for="incident_reason">事故原因</label>
+                        <div class="col-sm-5">
+                            <select class="form-control" id="incident_reason" name="incident_reason">
+                                <option value="船只碰撞">船只碰撞</option>
+                            <option value="洪水">洪水</option>
+                            <option value="船只碰撞">船只碰撞</option>
+                            <option value="洪水">洪水</option>
+                            <option value="疲劳">疲劳</option>
+                            <option value="超载">超载</option>
+                            <option value="冲刷">冲刷</option>
+                            <option value="汽车碰撞">汽车碰撞</option>
+                            <option value="地震">地震</option>
+                            <option value="高温受热膨胀">高温受热膨胀</option>
+                            <option value="偷工减料">偷工减料</option>
+                            <option value="意外">意外</option>
+                            <option value="塌方">塌方</option>
+                            <option value="河道采砂">河道采砂</option>
+                            <option value="钢缆腐蚀">钢缆腐蚀</option>
+                            <option value="装饰开裂">装饰开裂</option>
+                            <option value="质量问题">质量问题</option>
+                            <option value="行驶故障">行驶故障</option>
+                            <option value="限幅涡振">限幅涡振</option>
+                            <option value="施工堆土">施工堆土</option>
+                            <option value="设计">设计</option>
+                            <option value="施工堆土">施工堆土</option>
+                            <option value="山体滑坡">山体滑坡</option>
+                            <option value="人为拥挤">人为拥挤</option>
+                            <option value="强对流天气">强对流天气</option>
+                            <option value="泥石流">泥石流</option>
+                            <option value="裂缝">裂缝</option>
+                            <option value="火灾">火灾</option>
+                            <option value="火车超高">火车超高</option>
+                            <option value="非法抽沙">非法抽沙</option>
+                            <option value="吊杆断裂">吊杆断裂</option>
+                            <option value="大风">大风</option>
+                            <option value="冰凌撞击">冰凌撞击</option>
+                            <option value="爆炸">爆炸</option>
+                            <option value="其他">其他</option>
+                            </select>
+                        </div>
+                      </div>
+                       <div class="form-group form-group-lg">
+                        <label class="col-sm-2 control-label" for="incident_severity">事故严重程度</label>
+                        <div class="col-sm-5">
+                            <select class="form-control" id="incident_severity" name="incident_severity">
+                                <option value="基本完好">基本完好</option>
+                                <option value="轻微损伤">轻微损伤</option>
+                                <option value="中度损伤">中度损伤</option>
+                                <option value="严重损伤">严重损伤</option>
+                                <option value="坍塌">坍塌</option>
+                            </select>
+                        </div>
+                      </div>
+                       <div class="form-group form-group-lg">
+                        <label class="col-sm-2 control-label" for="event_time">事故发生时间</label>
+                        <div class="col-sm-5">
+                          <input class="form-control" type="text" name="event_time" placeholder="请输入时间具体时间(xxxx年xx月xx日)">
+                        </div>
+                      </div>
+                       <div class="form-group form-group-lg">
+                        <label class="col-sm-2 control-label" for="event_location">事故具体地点</label>
+                        <div class="col-sm-5">
+                          <input class="form-control" type="text" name="event_location" placeholder="请输入事故具体地点">
+                        </div>
+                      </div>
+
+                       <div class="form-group form-group-lg">
+                        <label class="col-sm-2 control-label" for="decision">响应措施</label>
+                        <div class="col-sm-10">
+                          <input class="form-control" type="text" name="decision" placeholder="请输入响应措施">
+                        </div>
+                      </div>
+                       <div class="form-group form-group-lg">
+                        <label class="col-sm-2 control-label" for="event_chain">事件演化链</label>
+                        <div class="col-sm-10">
+                          <input class="form-control" type="text" name="event_chain" placeholder="请输入事件演化链">
+                        </div>
+                       </div>
+
+                       <p style="margin-left: 300px">
+                        <button type="reset" class="btn btn-default btn-lg">取消(重新填写)</button>
+                         <button type="submit" class="btn btn-primary btn-lg" onclick="submitForm()">确认(加入案例)</button>
+                        </p>
+
+
+                    </form>
+                </div>
+
+                <div id="success-message" style="display: none;">添加案例成功</div>
+
+                <div style="float: right; width: 400px; margin-top: 10px; margin-right: 10px;">
+                  <h2>模块说明</h2>
+                  <p>该模块针对已经发生但是案例库中没有记录的案例</p>
+                </div>
+            </div>
+            <!--===================================================-->
+            <!--END CONTENT CONTAINER-->
+
+
+            <!--MAIN NAVIGATION-->
+            <!--===================================================-->
+            <nav id="mainnav-container">
+                <div id="mainnav">
+
+                    <!--Menu-->
+                    <!--================================-->
+                    <div id="mainnav-menu-wrap">
+                        <div class="nano">
+                            <div class="nano-content" style="width: 241px">
+
+                                <ul id="mainnav-menu" class="list-group">
+
+                                    <li class="list-header"> 系统概述</li>
+                                    <li>
+                                        <a href="{{ url_for('introduction') }}">
+                                            <i class="fa fa-file-text" style="width:24px"></i>
+                                            <span class="menu-title">
+                                                <span>桥梁事故案例推理系统简介</span>
+                                            </span>
+
+                                        </a>
+
+
+                                    </li>
+
+
+
+                                    <!--Category name-->
+						            <li class="list-header"> 桥梁事故案例可视化</li>
+
+                                    <!--Menu list item-->
+
+
+                                    <!--Menu list item-->
+                                   <li>
+                                        <a href="{{ url_for('search') }}">
+                                            <i class="fa fa-search" style="width:24px"></i>
+                                            <span class="menu-title">
+                                                <span>精确检索桥梁事故案例</span>
+                                            </span>
+
+                                        </a>
+
+
+                                    </li>
+                                    <li>
+                                        <a href="{{ url_for('get_all_relation') }}">
+                                            <i class="fa fa-pie-chart" style="width:24px"></i>
+                                            <span class="menu-title">
+                                                <span>桥梁事故案例知识图谱概览</span>
+                                            </span>
+
+                                        </a>
+
+                                    </li>
+                                    <!--Menu list item-->
+
+
+
+						            <li class="list-divider"></li>
+
+						            <!--Category name-->
+						            <li class="list-header">桥梁运营事故案例推理系统</li>
+
+						            <!--Menu list item-->
+						            <li >
+						                <a href="{{ url_for('case') }}">
+						                    <i class="fa fa-list" style="width:24px"></i>
+						                    <span class="menu-title">案例库查看</span>
+
+						                </a>
+
+
+						            </li>
+                                    <li >
+						                <a href="{{ url_for('add') }}">
+						                    <i class="fa fa-plus-circle" style="width:24px"></i>
+						                    <span class="menu-title">新增事故案例</span>
+
+						                </a>
+
+
+						            </li>
+                                    <li >
+						                <a href="{{ url_for('find') }}">
+						                    <i class="fa fa-search-plus" style="width:24px"></i>
+						                    <span class="menu-title">相似案例检索辅助决策</span>
+
+						                </a>
+
+
+						            </li>
+                                    <li >
+						                <a href="{{ url_for('solution') }}">
+						                    <i class="fa fa-user-plus" style="width:24px"></i>
+						                    <span class="menu-title">案例重用</span>
+
+						                </a>
+
+
+						            </li>
+
+                                </ul>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <!--================================-->
+                    <!--End menu-->
+
+                </div>
+            </nav>
+            <!--===================================================-->
+            <!--END MAIN NAVIGATION-->
+
+        </div>
+
+        <!-- FOOTER -->
+        <!--===================================================-->
+        <footer id="footer">
+
+           <p class="pad-lft">Copyright&#0169; 2023 蔡永刚  &nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;All Rights Reserved </p>
+
+        </footer>
+        <!--===================================================-->
+        <!-- END FOOTER -->
+
+        <!-- SCROLL PAGE BUTTON -->
+        <!--===================================================-->
+        <button class="scroll-top btn">
+            <i class="pci-chevron chevron-up"></i>
+        </button>
+        <!--===================================================-->
+    </div>
+
+
+<script>
+        // 监听表单提交事件
+        document.getElementById('myForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // 阻止表单默认提交行为
+
+            // 发送AJAX请求到后端
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/add/submit_form');
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    // 提交成功，显示弹窗
+                    alert('保存成功！');
+                } else {
+                    alert('提交失败，请重试！');
+                }
+            };
+
+            // 获取表单数据
+            var formData = new FormData(document.getElementById('myForm'));
+            var params = new URLSearchParams(formData).toString();
+
+            // 发送请求
+            xhr.send(params);
+        });
+</script>
+
+</body>
+</html>

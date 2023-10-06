@@ -1,0 +1,521 @@
+﻿{#<!DOCTYPE html>#}
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>基于案例推理的桥梁事故决策系统</title>
+
+    <!--Bootstrap Stylesheet [ REQUIRED ]-->
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="../static/images/logo.jpeg">
+    <!--Nifty Stylesheet [ REQUIRED ]-->
+    <link href="../static/css/nifty.min.css" rel="stylesheet">
+
+
+    <!--Nifty Premium Icon [ DEMONSTRATION ]-->
+    <link href="../static/css/nifty-demo-icons.min.css" rel="stylesheet">
+
+
+    <!--Demo [ DEMONSTRATION ]-->
+    <link href="../static/css/nifty-demo-icons.min.css" rel="stylesheet">
+    <link href="../static/css/nifty-demo.min.css" rel="stylesheet">
+    <link href="../static/css/font-awesome.min.css" rel="stylesheet">
+
+        
+    
+    <!--JAVASCRIPT-->
+    <!--=================================================-->
+
+    <!--Pace - Page Load Progress Par [OPTIONAL]-->
+    <link href="../static/css/pace.min.css" rel="stylesheet">
+   
+    <script src="../static/js/pace.min.js"></script>
+
+
+    <!--jQuery [ REQUIRED ]-->
+    <script src="../static/js/jquery-2.2.4.min.js"></script>
+
+
+    <!--BootstrapJS [ RECOMMENDED ]-->
+    <script src="../static/js/bootstrap.min.js"></script>
+
+
+    <!--NiftyJS [ RECOMMENDED ]-->
+    <script src="../static/js/nifty.min.js"></script>
+    <script src="../static/js/icons.js"></script>
+    <script src="../static/js/echarts.min.js"></script>
+    <script src="../static/js/tags.js"></script>
+
+
+
+    <!--=================================================-->
+    
+    <!--Demo script [ DEMONSTRATION ]-->
+    <script src="../static/js/nifty-demo.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    var availableTags = [
+        "8.23广东磨刀石大桥中山段船撞事故",	"8.19广东磨刀石大桥珠海段船撞事故",	"9.1江苏苏州亭子桥船撞事故",	"8.3辽宁大连万家河大桥垮塌事故",	"3.19广东港珠澳大桥船撞事故",	"9.21浙江温州龙港大桥船撞事故",	"9.8浙江舟山桃夭门大桥船撞事故",	"5.10浙江舟山响礁门大桥船撞事故",	"12.26江苏无锡复兴桥坍塌事故",	"7.18湖北仙桃岛口桥坍塌事故",	"7.27浙江桐庐自然村廊桥桥顶垮塌事故",	"9.7西藏林芝八一大桥坍塌事故",	"6.15广东佛山九江大桥船撞事故",	"7.15天津塘沽津晋高速匝道桥坍塌事故",	"6.8吉林白山锦江大桥垮塌事故",	"4.25浙江杭州艮秋立交桥车撞事故",	"7.9四川绵阳青莲盘江大桥坍塌事故",	"3.16浙江临安浙西大峡谷景区剑门关浮桥侧翻事故",	"6.13广西柳州二渡马路桥坍塌事故",	"11.6山西太原太钢人行便桥坍塌事故",	"7.24河南洛阳伊河汤营大桥坍塌事故",	"12.18湖北鄂州沪渝高速匝道桥侧翻事故",	"1.19重庆城口大榜村索桥垮塌事故",	"6.29黑龙江铁力市西大桥坍塌事故",	"7.16辽宁阜新洼子桥坍塌事故",	"5.13湖南岳阳平江桥船撞事故",	"8.2西藏林芝通麦大桥垮塌事故",	"5.16甘肃洮河大桥坍塌事故",	"1.4重庆綦江彩虹桥坍塌事故",	"8.24黑龙江哈尔滨阳明滩大桥引桥坍塌事故",	"4.7江苏苏州堰月桥坍塌事故",	"1.16云南曲靖独木水库大桥垮塌事故",	"9.22广西靖西邦亮村桥坍塌事故",	"10.28江苏高邮四异桥船撞事故 ",	"2.21浙江绍兴春晖立交桥坍塌事故",	"10.8上海青浦余家埭大桥船撞事故",	"11.14湖南郴州麻地大桥坍塌事故",	"7.6山西运城米汤沟大桥坍塌事故",	"6.8福建乌龙江大桥船撞事故",	"3.25上海浦东随塘桥船撞事故",	"3.10江苏丹阳老黄埝桥坍塌事故",	"11.7四川宜宾南门大桥断裂事故",	"7.15浙江杭州钱塘江三桥引桥坍陷事故",	"10.25 辽宁铁岭青洋河大桥塌陷事故",	"7.23山东临沂庄子桥坍塌事故",	"8.8江西抚州河东大桥坍塌事故",	"8.29江苏昆山大洋桥船撞事故",	"7.5黑龙江哈尔滨蚂蚁河大桥坍塌事故",	"7.25吉林磐石金矿桥坍塌事故",	"7.13上海临港新城东港区公用码头引桥船撞事故",	"7.3江苏无锡九顷桥坍塌事故",	"6.13广东党演大桥坍塌事故",	"10.14浙江台州椒江大桥船撞事故",	"11.5河南项城汾河桥坍塌",	"12.12广东美德大桥坍塌事故",	"4.21广州珠江大桥坍塌事故",	"5.29吉林长春东荣大桥塌陷事故",	"10.24山东德州义渡口东街桥桥面坍塌事故",	"10.17广东旱坑大桥坍塌事故",	"6.23上海金山横溪东街桥船撞事故",	"9.12浙江杭州艮山桥坍塌事故",	"8.19四川成都定江大桥坍塌事故",	"2.14四川眉山洪雅铁索桥垮塌事故",	"7.17北京过街天桥坍塌事件",	"11.11广东肇庆佛仔桥垮塌事故",	"4.5福建连江新大桥坍塌事故",	"1.5福建枋埔桥坍塌事故",	"6.19广东河源粤赣高速匝道桥断裂坍塌事故",	"4.28湖南娄底溢洪大桥垮塌事故",	"9.12江西吉安恩江古桥坍塌事故",	"8.1辽宁营口熊岳大桥坍塌事故",	"7.14福建武夷山公馆大桥坍塌事故",	"4.2河南新乡牧野大桥坍塌",	"4.29山东淄博镇南大桥坍塌事故",	"5.23浙江宁波奉化方桥船撞事故",	"11.28湖南怀化双江村铁索桥断塌事故",	"11.25广东万江大桥船撞事故",	"12.17湖南长沙过街天桥车撞事故",	"10.23浙江嘉兴倪王庙小庙桥断裂事故",	"10.27海南陵水椰林大桥坍塌事故",	"5.29江苏泰兴湖东大桥船撞事故",	"8.17福建东园镇区桥坍塌事故",	"5.26重庆彭水红泥石拱桥坍塌事故",	"5.6山东烟台山东河中桥坍塌事故",	"12.26黑龙江齐齐哈尔塔哈河大桥坍塌事故",	"1.12江苏泰州界河桥坍塌事故",	"8.13浙江瑞安石龙溪大桥坍塌事故",	"6.30四川德阳宝凤桥坍塌事故",	"10.13江西九江西海景区人行过桥坍塌事故",	"7.8四川凉山达利子依达沟大桥坍塌事故",	"2.1连霍高速河南三门峡段义昌大桥坍塌事故",	"5.12四川汶川高树大桥坍塌事故",	"5.12四川汶川百花大桥坍塌事故",	"5.12四川汶川彻底关大桥坍塌事故",	"5.12四川汶川寿江大桥事故",	"5.12四川都江堰高原大桥坍塌事故",	"5.12四川广元井田坝大桥坍塌事故",	"5.12四川成都小鱼洞大桥坍塌事故",	"7.19北京白河大桥坍塌事故",	"3.29黑龙江哈尔滨新兴大桥坍塌事故",	"4.27江苏南京冶浦桥桥面塌陷事故 ",	"4.23广东廉江塘背桥坍塌事故",	"8.23广东化州梧村大桥坍塌事故",	"7.17湖北武汉市木里大桥船撞事件",	"8.17四川都江堰白沙河桥坍塌事故",	"8.6湖北襄阳牌坊湾桥坍塌事故 ",	"8.16河南洛阳南车线鬼沟桥事故",	"7.21四川凉山瓦岩乡大桥坍塌事故",	"7.5湖北襄阳黄土岭大桥坍塌事故",	"7.11四川成都川西大桥坍塌事故",	"3.7湖北十堰东风公司专用铁路桥车撞坍塌事故",	"4.12山东滨州齐家桥坍塌事故",	"4.16广东深汕高速公路半幅路桥坍塌事故",	"11.17河南平顶山膨河桥垮塌事故",	"6.26浙江瑞安飞云江大桥船撞事故",	"5.18浙江杭州庆春路人行天桥车撞事故",	"10.15重庆渝北G50渝北段车行天桥车撞事故",	"5.13江苏常州运河大桥坍塌事故",	"8.11黑龙江绥化渠首桥坍塌事故",	"11.9福建桂林村桥坍塌事故",	"2.28江西吉安明堂洲桥坍塌事故",	"6.10辽宁盘锦田庄台天桥坍塌事故",	"6.22湖北襄阳清溪河大桥桥面隆起事故",	"7.22广西南宁国道小路桥坍塌事故",	"4.12新疆库尔勒孔雀河大桥坍塌事故",	"7.6福建福寿桥事故",	"9.19连霍高速河南新安段上跨天桥垮塌事故",	"6.9广东肇庆西江大桥船撞事故",	"7.27浙江湖州百年岂风桥船撞事故",	"9.9江苏无锡花明桥船撞事故",	"4.15广东佛山西安亭大桥船撞事故",	"4.15上海嘉定通浦塘大桥船撞事故",	"5.23广东中山荷塘大桥船撞事故",	"9.24广东白坭河大桥船撞事故",	"5.7广东顺德大沙大桥船撞事故",	"1.10广东广州东洲大桥船撞事故",	"5.14广东东莞中堂水道桥船撞事故",	"8.13广东中山沙口大桥旧桥船撞事故",	"4.20广东和顺大桥船撞事故",	"1.8广东广州洪奇沥大桥船撞事故",	"3.27广东佛山西樵大桥船撞事故",	"7.27广东广州紫坭大桥船撞事故",	"3.27浙江舟山金塘大桥船撞事故",	"7.7江西上饶太阳埠大桥船撞事故",	"7.3广西贺州浔江特大桥船撞事故",	"8.9广东顺德林头大桥船撞事故",	"2.2浙江湖州水北大桥船撞事故",	"7.27浙江温州老殿后村桥船长事故",	"10.5广东新会虎坑大桥船撞事故",	"4.1广东珠海莲溪大桥船撞事故",	"8.23广州珠海桂山油库码头栈桥船撞事故",	"9.10江苏扬州壁虎大桥船撞事故",	"8.15江苏兴化端午桥船撞事故",	"12.26江苏盐城商侍大桥船撞事故",	"10.15广东肇庆西江大桥船撞事故",	"12.30江苏南通国强大桥船撞事故",	"5.12江苏常州红旗桥船撞事故",	"11.22江苏溧阳中渡桥船撞事故",	"3.9上海松江斜塘大桥船撞事故",	"8.7浙江宁波新江桥船撞事故",	"7.16广西贵港平南大桥船撞事故",	"7.5上海奉贤金汇港桥船撞事故",	"8.5湖南怀化过江供水铁拉大桥遇风垮塌事故 ",	"6.23河北石家庄子龙大桥护栏断裂事故",	"8.12甘肃华干路大桥坍塌事故",	"11.19江西南昌南邓大桥坍塌事故",	"6.18河北平泉旧平泉大桥坍塌事故",	"12.10四川攀枝花金沙江大桥塌陷事故",	"12.22广东江门圣堂大桥坍塌事故",	"11.25陕西安康冷水河大桥坍塌事故",	"5.26江苏扬州东汇大桥船撞事故",	"7.7安徽六安市七里桥坍塌事故",	"8.29广东梅州黄金大桥坍塌事故",	"11.12湖北武昌良久货运码头渡口桥垮塌事故",	"2.15广东深圳深圳湾大桥事故",	"10.10江苏无锡高架桥侧翻事故",	"5.22青海果洛州玛多野马滩大桥坍塌事故",	"9.20四川雅安姚河坝桥断裂事故",	"9.14山西太原武宿村高架桥坍塌事故 ",	"4.15浙江杭州萧山工人路高架桥引桥坍塌事故",	"7.3浙江临海程家桥断裂事故",	"5.24安徽怀宁和平桥倒塌事故",	"11.20四川泸州长江大桥桥墩开裂事故",	"9.14黑龙江哈尔滨米巴兰河桥坍塌事故",	"9.7四川成都三渡水大桥坍塌事故",	"9.2北京水泥桥坍塌事故",	"4.12浙江衢州长风大桥开裂事故",	"8.14江西赣州大古山桥断裂事故",	"6.9陕西西安灞桥（老）公路大桥桥墩移位事故",	"6.9陕西西安陇海线灞河铁路桥坍塌事故",	"6.9陕西西安西康线灞河铁路桥桥墩外露事故",	"11.30安徽黄山红星大桥坍塌事故",	"4.20广东潮州广济桥船撞事故",	"8.6山东济南燕李黄河浮桥断裂事故",	"8.14浙江杭州伍杭运河桥坍塌事故",	"10.24广西南宁新兴苑段过街天桥坍塌事故",	"10.24江苏丹阳庭河桥坍塌事故",	"11.24天津大港老窦家庄大桥坍塌事故",	"10.23内蒙古包头民族东路高架桥倾斜事故",	"4.9河南郑州跨京广铁路大桥事故",	"2.10宁夏吴忠市水套村西桥坍塌事故",	"12.2湖南常德泥窝潭乡石拱桥坍塌事故",	"8.1山东济南泺口黄河浮桥断裂事故",	"5.30四川成都林湾人行过街天桥车撞事故",	"7.5四川成都府河大桥车撞事故",	"6.16河南新蔡县106国道关津大桥坍塌事故",	"2.26北京营门北大桥坍塌事件",	"7.8山西临汾席坊桥坍塌事故",	"8.15山西太原东柳林桥坍塌事故",	"7.13广州北斗大桥南引桥船撞事故",	"1.15江苏南通英雄大桥船撞事故",	"6.8江苏丹阳九曲河路巷桥船撞事故",	"4.24广东广州川槎大桥船撞事故",	"5.31浙江宁波北仑协和码头引桥船撞事故",	"7.27四川眉山岷江大桥坍塌事故",	"5.15浙江绍兴东郭立交桥事故",	"5.12浙江湖州千金镇西大桥船撞事故",	"12.26上海松江油墩港航道公路桥船撞事故",	"4.8山东德州马颊河大桥坍塌事故",	"7.26江苏江阴永安桥坍塌事故",	"7.24河南南阳百年老洋桥坍塌事故",	"1.2湖北武汉卓刀泉立交桥事故",	"6.26广东深圳夏陂头桥坍塌事故",	"8.3山东烟台外夹河铁路大桥坍塌事故",	"8.22江西宜春贾溪桥坍塌事故",	"3.21广东韶关张滩武水桥船撞事故",	"9.13四川德阳连山大桥桥面下陷事故",	"6.11安徽池州杜坞大桥船撞事故",	"3.21广东韶关百旺大桥船撞事故",	"8.19四川成都通济桥坍塌事故",	"4.11贵州从江国道恰里二桥坍塌事故",	"7.2湖北孝感白沙大桥坍塌事故 ",	"8.20陕西汉中黄沙河大桥坍塌事故",	"8.17四川雅安八牌大桥坍塌事故",	"9.25山西运城南河桥坍塌事故",	"7.9江西宜春秀江人行钢桥坍塌事故",	"7.4江西鹰潭文坊镇桥坍塌事故",	"9.30广东旧神岗大桥坍塌事故",	"3.16湖北武汉长丰桥车辆侧翻事故",	"1.3山东济南东郊黄河浮桥断裂事故",	"10.19甘肃立交桥坍塌事故",	"5.9广东成塘径拱桥事故",	"8.12江西赣州蕉田大桥坍塌事故",	"8.14四川乐山青衣江旧大桥坍塌事故",	"8.13辽宁抚顺南杂木大桥坍塌事故",	"11.19广东东苑桥受损事故",	"7.28四川绵阳八角人行天桥车撞事故",	"9.10浙江丽水徐岸大桥坍塌事故",	"7.11江西吉安白鹭洲拱桥船撞事故",	"7.9广西河池驯乐乡板果桥受损事故",	"9.11重庆涪陵斜阳溪大桥垮塌事故",	"5.30河北邢台王庄桥坍塌事故",	"8.12内蒙古呼和浩特跨水磨沟桥坍塌事故",	"3.20山东滨州邢家村东侧桥梁坍塌事故",	"7.13湖南株洲走沙港桥受损事故",	"7.11江苏盐城通榆河桥坍塌事故",	"4.19湖北恩施罗连溪大桥坍塌事件",	"12.18湖北武汉木兰老桥垮塌事故",	"5.9江西上饶傍罗大桥坍塌事故",	"7.22湖北荆州济汉桥塌陷事故",	"11.13陕西安康阴沟河石拱桥坍塌事故",	"1.26浙江嘉兴冯介木桥坍塌事故",	"10.11湖北咸宁马家湾桥垮塌事故",	"8.17江苏徐州丁楼河桥坍塌事故",	"3.15江苏徐州田河桥桥面塌陷事故",	"7.23湖北荆门大路港桥坍塌事故",	"4.23山东日照两河桥坍塌事故",	"9.15甘肃定西阳坡桥坍塌事故",	"6.14广东东江大桥坍塌事故",	"7.25陕西商洛大商塬村大桥开裂事故",	"1.29广东湛江江心岛大船撞事故",	"6.18天津彭元庄村砖石桥坍塌事故",	"8.22湖北武汉汉江二桥船撞事故",	"9.16陕西安康罗羌湾大桥坍塌事故",	"9.22江苏南通船撞陆岛通道管线桥事故",	"8.11浙江湖州市乌象坝石拱大桥坍塌事故",	"8.14浙江丽水船埠头大桥塌陷事故",	"9.15福建泉州东关桥坍塌事故 ",	"5.23广东增城区东门桥坍塌事故",	"8.2四川绵阳黄土大桥坍塌事故",	"8.19四川绵阳先林大桥坍塌事故",	"7.9四川绵竹绵远河牛鼻子大桥垮塌事故",	"7.9四川绵竹人民渠跨干河子大桥坍塌事故",	"7.9四川绵竹兴隆拱星大桥垮塌事故",	"8.19四川广汉石亭江铁路大桥坍塌事故",	"8.19四川成都驭虹桥坍塌事故",	"5.30广东肇庆七星岩大桥下沉事故",	"7.10湖南衡阳洋塘河坝水电站桥船撞事故",	"7.19甘肃旧八里大桥坍塌事故",	"7.8广东陆丰洗渔溪大桥坍塌事故",	"9.13陕西汉中西关旧桥开裂事故",	"10.8浙江湖州龙翔路大桥船撞事故",	"7.7甘肃敦煌莫高窟窟前大桥坍塌事故",	"8.12四川绵竹幸福大桥坍塌事故",	"7.22河南陇海荥阳段铁路桥塌方事件",	"6.20江西鹰潭鱼塘大桥坍塌事故",	"9.7新疆克州阿扎克乡桥坍塌事故",	"7.29四川广元瓦子桥坍塌事故",	"7.29四川凉山凉红桥坍塌事故",	"7.6福建南平桂溪八字撑木平廊桥坍塌事故",	"7.7福建南平桥下村廊桥坍塌事故",	"7.6福建南平武夷山麻坜桥坍塌事故",	"7.5福建南平溪东乡桥坍塌事故",	"7.18黑龙江哈尔滨苇沙河铁桥",	"11.28重庆黔江风雨廊桥事故",	"8.1陕西宝鸡六川桥坍塌事故",	"3.19广西桂林湘江大桥船撞事故",	"7.22天津滨海跨永定新河特大桥船撞事故",	"7.24广东廉江西山大桥坍塌事故",	"6.20湖北赤壁东洲大桥事故",	"5.5广东广州虎门大桥晃动事故",	"8.8广东清远青莲公路桥坍塌事故",	"11.24江西宜春赣江大桥船撞事故",	"7.13江苏南通蔡渡大桥船撞事故",	"7.8湖北黄冈吴家咀大桥船撞事件",	"8.6广东燕岗桥坍塌事故",	"8.11湖北黄冈上巴河大桥事故",	"6.14广东矮江桥坍塌事故",	"7.1山西吕梁忻黑线九龙湾2号坍塌事故",	"11.20甘肃兰州黄河大桥护堤坍塌事故",	"4.12河南漯河澧河大桥坍塌事故",	"3.25浙江杭州五常收费斜交桥断裂事故",	"12.28上海黄浦河南路桥桥墩开裂事故",	"6.23广西合浦文尉坊大桥引桥坍塌事故",
+    ];
+    $( "#search" ).autocomplete({
+      source: availableTags
+    });
+  } );
+  </script>
+    <style type="text/css"> 
+    #tagsList {position:relative; width:350px; height:300px;left: 100px; }
+#tagsList a {position:absolute; top:0px; left:0px; font-family: SimSun, serif ; color:gray; font-weight:bold; text-decoration:none; padding: 3px 6px;font-size: 25px; }
+#tagsList a:hover { color:#249e92; letter-spacing:2px;}
+#search:focus{
+    border: 1px solid #249e92;
+}
+
+    /* 自动补全下拉框的样式 */
+.ui-autocomplete {
+  position: absolute;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 9999;
+}
+
+/* 候选项的样式 */
+.ui-menu-item {
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.ui-menu-item:hover {
+  background-color: #f5f5f5;
+}
+
+/* 选中项的样式 */
+.ui-state-active {
+  background-color: #007bff;
+  color: #fff;
+}
+
+    </style>
+
+</head>
+
+<body>
+
+    <div id="container" class="effect aside-float aside-bright mainnav-lg">
+        
+        <!--NAVBAR-->
+        <!--===================================================-->
+        <header id="navbar">
+            <div id="navbar-container" class="boxed">
+
+                <!--Brand logo & name-->
+                <!--================================-->
+                <div class="navbar-header">
+                    <a href="#" class="navbar-brand">
+                        <img src="../static/images/logo.jpeg" alt="Nifty Logo" class="brand-icon">
+                        <div class="brand-title">
+                            <span class="brand-text">蔡永刚毕设</span>
+                        </div>
+                    </a>
+                </div>
+                <!--================================-->
+                <!--End brand logo & name-->
+
+
+                <!--Navbar Dropdown-->
+                <!--================================-->
+                <div class="navbar-content clearfix">
+                    <ul class="nav navbar-top-links pull-left">
+
+                        <!--Navigation toogle button-->
+                        <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                        <li class="tgl-menu-btn">
+                            <a class="mainnav-toggle" href="#">
+                                <i class="demo-pli-view-list"></i>
+                            </a>
+                        </li>
+                        
+                    </ul>
+                    <ul class="nav navbar-top-links pull-left">
+
+                        <h4>基于案例推理的桥梁事故决策系统</h4>
+                        
+                    </ul>
+                </div>
+                <!--================================-->
+                <!--End Navbar Dropdown-->
+
+            </div>
+        </header>
+        <!--===================================================-->
+        <!--END NAVBAR-->
+
+        <div class="boxed">
+
+            <!--CONTENT CONTAINER-->
+            <!--===================================================-->
+            <div id="content-container">
+
+                <!--Page content-->
+                <!--===================================================-->
+                <div id="page-content">
+                    
+					<h4 class="text-main pad-btm bord-btm">精确检索桥梁事故案例</h4>
+                
+              <div class="row">
+                
+                
+                <div class="col-lg-6">
+                    
+                    
+                    </div>
+                    <div class="col-lg-2"></div>
+                    <div class="col-lg-4">
+                        <div class="input-group" >
+                            <input type="text" id="search" class="form-control input-lg"  placeholder="请输入你要检索的案例...">
+                            <span class="input-group-addon btn btn-mint"  onclick="search()">搜索</span>
+
+                        </div>
+                    </div>
+                    
+              </div>
+                    <div class="row" style="height: 40px;"></div>
+                     <div class="row" >
+                        <div class="col-lg-8" style="height: 600px;" id="guanxi">
+
+
+                    </div>
+                    <div class="col-lg-2"></div>
+                    <div  class="col-lg-4" id="tagsList">
+                    <a href="#" data="9.1江苏苏州亭子桥船撞事故" >9.1江苏苏州亭子桥船撞事故</a>
+                    <a href="#" data="8.23广东磨刀石大桥中山段船撞事故">8.23广东磨刀石大桥中山段船撞事故</a>
+                    <a href="#" data="8.3辽宁大连万家河大桥垮塌事故">8.3辽宁大连万家河大桥垮塌事故</a>
+                    <a href="#" data="5.10浙江舟山响礁门大桥船撞事故">5.10浙江舟山响礁门大桥船撞事故</a>
+                    <a href="#" data="12.26江苏无锡复兴桥坍塌事故">12.26江苏无锡复兴桥坍塌事故</a>
+                    <a href="#" data="7.18湖北仙桃岛口桥坍塌事故">7.18湖北仙桃岛口桥坍塌事故</a>
+                    <a href="#" data="7.27浙江桐庐自然村廊桥桥顶垮塌事故">7.27浙江桐庐自然村廊桥桥顶垮塌事故</a>
+                    <a href="#" data="9.7西藏林芝八一大桥坍塌事故">9.7西藏林芝八一大桥坍塌事故</a>
+                    <a href="#" data="6.15广东佛山九江大桥船撞事故">6.15广东佛山九江大桥船撞事故</a>
+                    <a href="#" data="7.15天津塘沽津晋高速匝道桥坍塌事故">7.15天津塘沽津晋高速匝道桥坍塌事故</a>
+                    <a href="#" data="6.8吉林白山锦江大桥垮塌事故">6.8吉林白山锦江大桥垮塌事故</a>
+                    <a href="#" data="4.25浙江杭州艮秋立交桥车撞事故">4.25浙江杭州艮秋立交桥车撞事故</a>
+                    <a href="#" data="7.9四川绵阳青莲盘江大桥坍塌事故">7.9四川绵阳青莲盘江大桥坍塌事故</a>
+                    <a href="#" data="6.13广西柳州二渡马路桥坍塌事故">6.13广西柳州二渡马路桥坍塌事故</a>
+                    <a href="#" data="11.6山西太原太钢人行便桥坍塌事故">11.6山西太原太钢人行便桥坍塌事故</a>
+                    <a href="#" data="7.24河南洛阳伊河汤营大桥坍塌事故">7.24河南洛阳伊河汤营大桥坍塌事故</a>
+                    </div>
+                    </div>
+					
+                </div>
+                <!--===================================================-->
+                <!--End page content-->
+
+
+            </div>
+            <!--===================================================-->
+            <!--END CONTENT CONTAINER-->
+
+            
+            <!--MAIN NAVIGATION-->
+            <!--===================================================-->
+            <nav id="mainnav-container">
+                <div id="mainnav">
+
+                    <!--Menu-->
+                    <!--================================-->
+                    <div id="mainnav-menu-wrap">
+                        <div class="nano">
+                            <div class="nano-content" style="width: 241px">
+
+                                <ul id="mainnav-menu" class="list-group">
+
+                                    <li class="list-header"> 系统概述</li>
+                                    <li>
+                                        <a href="{{ url_for('introduction') }}">
+                                            <i class="fa fa-file-text" style="width:24px"></i>
+                                            <span class="menu-title">
+                                                <span>桥梁事故案例推理系统简介</span>
+                                            </span>
+
+                                        </a>
+
+
+                                    </li>
+						
+						            
+                                  
+                                    <!--Category name-->
+						            <li class="list-header"> 桥梁事故案例可视化</li>
+                        
+                                    <!--Menu list item-->
+                                    
+                        
+                                    <!--Menu list item-->
+                                   <li>
+                                        <a href="{{ url_for('search') }}">
+                                            <i class="fa fa-search" style="width:24px"></i>
+                                            <span class="menu-title">
+                                                <span>精确检索桥梁事故案例</span>
+                                            </span>
+                                            
+                                        </a>
+                        
+                                        
+                                    </li>
+                                    <li>
+                                        <a href="{{ url_for('get_all_relation') }}">
+                                            <i class="fa fa-pie-chart" style="width:24px"></i>
+                                            <span class="menu-title">
+                                                <span>桥梁事故案例知识图谱概览</span>
+                                            </span>
+                                            
+                                        </a>
+                        
+                                    </li>
+                                    <!--Menu list item-->
+                                   
+						          
+                                   
+						            <li class="list-divider"></li>
+						
+						            <!--Category name-->
+						            <li class="list-header">桥梁运营事故案例推理系统</li>
+						
+						            <!--Menu list item-->
+						            <li >
+						                <a href="{{ url_for('case') }}">
+						                    <i class="fa fa-list" style="width:24px"></i>
+						                    <span class="menu-title">案例库查看</span>
+
+						                </a>
+
+
+						            </li>
+                                    <li >
+						                <a href="{{ url_for('add') }}">
+						                    <i class="fa fa-plus-circle" style="width:24px"></i>
+						                    <span class="menu-title">新增事故案例</span>
+
+						                </a>
+
+
+						            </li>
+                                    <li >
+						                <a href="{{ url_for('find') }}">
+						                    <i class="fa fa-search-plus" style="width:24px"></i>
+						                    <span class="menu-title">相似案例检索辅助决策</span>
+
+						                </a>
+
+
+						            </li>
+                                    <li >
+						                <a href="{{ url_for('solution') }}">
+						                    <i class="fa fa-user-plus" style="width:24px"></i>
+						                    <span class="menu-title">案例重用</span>
+
+						                </a>
+
+
+						            </li>
+
+                                </ul>
+
+
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <!--================================-->
+                    <!--End menu-->
+
+                </div>
+            </nav>
+            <!--===================================================-->
+            <!--END MAIN NAVIGATION-->
+
+        </div>
+
+        <!-- FOOTER -->
+        <!--===================================================-->
+        <footer id="footer">
+
+           <p class="pad-lft">Copyright&#0169; 2023 蔡永刚  &nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;All Rights Reserved </p>
+
+        </footer>
+        <!--===================================================-->
+        <!-- END FOOTER -->
+
+        <!-- SCROLL PAGE BUTTON -->
+        <!--===================================================-->
+        <button class="scroll-top btn">
+            <i class="pci-chevron chevron-up"></i>
+        </button>
+        <!--===================================================-->
+    </div>
+    <!--===================================================-->
+    <!-- END OF CONTAINER -->
+   <script type="text/javascript">
+    $(document).keypress(function (e) {
+
+    // 回车键事件
+    if (e.which == 13) {
+        search();
+    }
+});
+
+var rela = { "nodes": [], "links": [] };
+
+function search() {
+    $.getJSON('/search_name', {
+        name: $("#search").val(),
+    }, function (json) {
+         var idIndexMap = {};
+        for (var i = 0; i < json.nodes.length; i++) {
+            idIndexMap[json.nodes[i].id] = i;
+        }
+
+        for (var i = 0; i < json.links.length; i++) {
+            json.links[i].source = idIndexMap[json.links[i].source];
+            json.links[i].target = idIndexMap[json.links[i].target];
+        }
+         option.series[0].links = json.links;
+         option.series[0].data = json.nodes
+         myChart.setOption(option, true);
+    });
+}
+
+$(".col-lg-4 a").click(function () {
+    $.getJSON('/search_name', {
+        name: $(this).attr("data"),
+    }, function (json) {
+        var idIndexMap = {};
+        for (var i = 0; i < json.nodes.length; i++) {
+            idIndexMap[json.nodes[i].id] = i;
+        }
+
+        for (var i = 0; i < json.links.length; i++) {
+            json.links[i].source = idIndexMap[json.links[i].source];
+            json.links[i].target = idIndexMap[json.links[i].target];
+        }
+         option.series[0].links = json.links;
+         option.series[0].data = json.nodes
+         myChart.setOption(option, true);
+    });
+});
+
+window.onresize = function () {
+    myChart.resize();
+}
+
+$.ajaxSetup({ async: false });
+var myChart = echarts.init(document.getElementById("guanxi"));
+myChart.showLoading();
+myChart.hideLoading();
+
+var option = {
+    //backgroundColor: "white",
+    animationDurationUpdate: 1500,
+    animationEasingUpdate: 'quinticInOut',
+    legend: {
+        x: "center",
+        show: true,
+        data: ["Accident", "Structure", "Material", "Part", "Season", "Period", "Area","Location","Level","types","Reason","Degree"]
+    },
+    series: [
+        {
+            type: 'graph',
+            layout: 'force',
+            symbolSize: 65,
+            edgeSymbol: ['circle', 'arrow'],
+            edgeSymbolSize: [4, 5],
+            edgeLabel: {
+                normal: {
+                    show: true,
+                    textStyle: {
+                        fontSize: 12
+                    },
+                    formatter: "{c}"
+                }
+            },
+            force: {
+                repulsion: 2500,
+                edgeLength: [10, 100]
+            },
+            focusNodeAdjacency: true,
+            draggable: true,
+            roam: true,
+            categories: [{
+                                            name: 'Accident',
+                                        }, {
+                                            name: 'Structure',
+                                        },{
+                                            name: 'Material',
+                                        }, {
+                                            name: 'Part',
+                                        },
+                                        {
+                                            name: 'Season',
+                                        }, {
+                                            name: 'Period',
+                                        }, {
+                                            name: 'Area',
+                                        },
+                                        {
+                                            name: 'Location',
+                                        },
+                                        {
+                                            name: 'Level',
+                                        },
+                                        {
+                                            name: 'types',
+                                        },
+                                        {
+                                            name: 'Reason',
+                                        },
+                                        {
+                                            name: 'Degree',
+                                        }
+                                        ],
+            label: {
+                normal: {
+                    show: true,
+                    textStyle: {
+                        fontSize: 12,
+
+                    },
+                }
+            },
+            tooltip: {
+                                            formatter: function (node) { // 区分连线和节点，节点上额外显示其他数字
+                                                if (!node.value) {
+                                                    return node.data.name;
+                                                } else {
+                                                    return node.data.name + ":" + node.data.showNum;
+                                                }
+                                            },
+                                        },
+            lineStyle: {
+                normal: {
+                    opacity: 0.9,
+                    width: 1.1,
+                    curveness: 0,
+                    color: 'black'
+
+                },
+            },
+            // progressiveThreshold: 700,
+            nodes: [],
+            links: [],
+        }
+    ]
+};
+option.series[0].links.lineStyle.color = 'black';
+</script>
+</body>
+</html>

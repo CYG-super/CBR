@@ -1,0 +1,476 @@
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>基于案例推理的桥梁事故决策系统</title>
+
+    <!--Bootstrap Stylesheet [ REQUIRED ]-->
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="../static/images/logo.jpeg">
+    <!--Nifty Stylesheet [ REQUIRED ]-->
+    <link href="../static/css/nifty.min.css" rel="stylesheet">
+
+
+    <!--Nifty Premium Icon [ DEMONSTRATION ]-->
+    <link href="../static/css/nifty-demo-icons.min.css" rel="stylesheet">
+
+
+    <!--Demo [ DEMONSTRATION ]-->
+    <link href="../static/css/nifty-demo-icons.min.css" rel="stylesheet">
+    <link href="../static/css/nifty-demo.min.css" rel="stylesheet">
+    <link href="../static/css/font-awesome.min.css" rel="stylesheet">
+
+
+
+    <!--JAVASCRIPT-->
+    <!--=================================================-->
+
+    <!--Pace - Page Load Progress Par [OPTIONAL]-->
+    <link href="../static/css/pace.min.css" rel="stylesheet">
+
+    <script src="../static/js/pace.min.js"></script>
+
+
+    <!--jQuery [ REQUIRED ]-->
+    <script src="../static/js/jquery-2.2.4.min.js"></script>
+
+
+    <!--BootstrapJS [ RECOMMENDED ]-->
+    <script src="../static/js/bootstrap.min.js"></script>
+
+
+    <!--NiftyJS [ RECOMMENDED ]-->
+    <script src="../static/js/nifty.min.js"></script>
+    <script src="../static/js/icons.js"></script>
+    <script src="../static/js/echarts.min.js"></script>
+    <script src="../static/js/tags.js"></script>
+
+
+
+    <!--=================================================-->
+
+    <!--Demo script [ DEMONSTRATION ]-->
+    <script src="../static/js/nifty-demo.min.js"></script>
+    <style type="text/css">
+    #tagsList {position:relative; width:250px; height:250px; }
+#tagsList a {position:absolute; top:0px; left:0px; font-family: Microsoft YaHei; color:gray; font-weight:bold; text-decoration:none; padding: 3px 6px; }
+#tagsList a:hover { color:#249e92; letter-spacing:2px;}
+#search:focus{
+    border: 1px solid #249e92;
+}
+    </style>
+    <style>
+		 table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+        </style>
+
+</head>
+
+<body>
+
+    <div id="container" class="effect aside-float aside-bright mainnav-lg">
+
+        <!--NAVBAR-->
+        <!--===================================================-->
+        <header id="navbar">
+            <div id="navbar-container" class="boxed">
+
+                <!--Brand logo & name-->
+                <!--================================-->
+                <div class="navbar-header">
+                    <a href="#" class="navbar-brand">
+                        <img src="../static/images/logo.jpeg" alt="Nifty Logo" class="brand-icon">
+                        <div class="brand-title">
+                            <span class="brand-text">蔡永刚毕设</span>
+                        </div>
+                    </a>
+                </div>
+                <!--================================-->
+                <!--End brand logo & name-->
+
+
+                <!--Navbar Dropdown-->
+                <!--================================-->
+                <div class="navbar-content clearfix">
+                    <ul class="nav navbar-top-links pull-left">
+
+                        <!--Navigation toogle button-->
+                        <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                        <li class="tgl-menu-btn">
+                            <a class="mainnav-toggle" href="#">
+                                <i class="demo-pli-view-list"></i>
+                            </a>
+                        </li>
+
+                    </ul>
+                    <ul class="nav navbar-top-links pull-left">
+
+                        <h4>基于案例推理的桥梁事故决策系统</h4>
+
+                    </ul>
+                </div>
+                <!--================================-->
+                <!--End Navbar Dropdown-->
+
+            </div>
+        </header>
+        <!--===================================================-->
+        <!--END NAVBAR-->
+
+        <div class="boxed">
+
+            <!--CONTENT CONTAINER-->
+            <!--===================================================-->
+            <div id="content-container">
+
+                <!--Page content-->
+                <!--===================================================-->
+                <div id="page-content">
+
+					<h4 class="text-main pad-btm bord-btm">案例重用</h4>
+
+              <div class="row">
+                  <p>案例复用模块是CBR推理技术最巧妙的一个环节。此时，决策者根据上个模块相似案例检索和决策功能模块得出相似案例处理方案建议，根据新问题的现实情况做相应的修改、复写，制定出新问题的解决方案，达到决策效果。再将新的决策结果添加至数据库中，实现了再学习的作用。</p>
+
+
+                </div>
+                    <div>
+                    <button type="submit" class="btn btn-primary btn-lg" onclick="fetchData()">查看最相似案例及其解决方案</button>
+
+                    <div id="result_div" style="display: none;margin: 0 100px;color: black">
+                    <h2>请参照相似案例进行决策:</h2>
+                    <table id="result_table">
+                        <tr>
+                                <th>事故名称</th>
+                                <th>事故具体时间</th>
+                                <th>事故具体地点</th>
+                                <th>事故响应措施</th>
+                                <th>事故响应链</th>
+                                <th>总相似度</th>
+
+                        </tr>
+                    </table>
+                </div>
+                        </div>
+
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <div>
+                    <form class="form-horizontal" style="margin-left: 300px"  id="myForm" action="/solution/submit_form" method="POST">
+                        <p style="font-size: 20px;color: black">决策方案:</p>
+
+                        <div class="form-group form-group-lg">
+                            <label class="col-sm-2 control-label" for="decision">决策方案</label>
+                            <div class="col-sm-5">
+                                <input class="form-control" type="text" id="decision" name="decision" placeholder="请输入新增案例决策方案">
+                            </div>
+                        </div>
+
+                        <p style="font-size: 20px;color: black">其他案例属性值:</p>
+
+                        <div class="form-group form-group-lg">
+                            <label class="col-sm-2 control-label" for="event_name">事故名称</label>
+                            <div class="col-sm-5">
+                                <input class="form-control" type="text" id="event_name" name="event_name" placeholder="请输入事故名称">
+                            </div>
+                        </div>
+
+                        <div class="form-group form-group-lg">
+                            <label class="col-sm-2 control-label" for="event_time">事故具体时间</label>
+                            <div class="col-sm-5">
+                                <input class="form-control" type="text" id="event_time" name="event_time" placeholder="请输入具体时间">
+                            </div>
+                        </div>
+
+                        <div class="form-group form-group-lg">
+                            <label class="col-sm-2 control-label" for="event_location">事故具体地点</label>
+                            <div class="col-sm-5">
+                                <input class="form-control" type="text" id="event_location" name="event_location" placeholder="请输入具体地点">
+                            </div>
+                        </div>
+
+                        <div class="form-group form-group-lg">
+                            <label class="col-sm-2 control-label" for="event_chain">事故演化链</label>
+                            <div class="col-sm-5">
+                                <input class="form-control" type="text" id="event_chain" name="event_chain" placeholder="请输入事故演化链">
+                            </div>
+                        </div>
+
+                        <p style="margin-left: 250px">
+                            <button type="reset" class="btn btn-default btn-lg">取消(重新填写)</button>
+                            <button type="submit" class="btn btn-primary btn-lg">确认(加入案例)</button>
+                        </p>
+                    </form>
+                </div>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+
+
+
+
+                <!--===================================================-->
+                <!--End page content-->
+
+
+            </div>
+            <!--===================================================-->
+            <!--END CONTENT CONTAINER-->
+
+
+            <!--MAIN NAVIGATION-->
+            <!--===================================================-->
+            <nav id="mainnav-container">
+                <div id="mainnav">
+
+                    <!--Menu-->
+                    <!--================================-->
+                    <div id="mainnav-menu-wrap">
+                        <div class="nano">
+                            <div class="nano-content" style="width: 241px">
+
+                                <ul id="mainnav-menu" class="list-group">
+
+                                    <li class="list-header"> 系统概述</li>
+                                    <li>
+                                        <a href="{{ url_for('introduction') }}">
+                                            <i class="fa fa-file-text" style="width:24px"></i>
+                                            <span class="menu-title">
+                                                <span>桥梁事故案例推理系统简介</span>
+                                            </span>
+
+                                        </a>
+
+
+                                    </li>
+
+
+
+                                    <!--Category name-->
+						            <li class="list-header"> 桥梁事故案例可视化</li>
+
+                                    <!--Menu list item-->
+
+
+                                    <!--Menu list item-->
+                                   <li>
+                                        <a href="{{ url_for('search') }}">
+                                            <i class="fa fa-search" style="width:24px"></i>
+                                            <span class="menu-title">
+                                                <span>精确检索桥梁事故案例</span>
+                                            </span>
+
+                                        </a>
+
+
+                                    </li>
+                                    <li>
+                                        <a href="{{ url_for('get_all_relation') }}">
+                                            <i class="fa fa-pie-chart" style="width:24px"></i>
+                                            <span class="menu-title">
+                                                <span class="menu-title">桥梁事故案例知识图谱概览</span>
+                                            </span>
+
+                                        </a>
+
+                                    </li>
+                                    <!--Menu list item-->
+
+
+
+						            <li class="list-divider"></li>
+
+						            <!--Category name-->
+						            <li class="list-header">桥梁运营事故案例推理系统</li>
+
+						            <!--Menu list item-->
+						            <li >
+						                <a href="{{ url_for('case') }}">
+						                    <i class="fa fa-list" style="width:24px"></i>
+						                    <span class="menu-title">案例库查看</span>
+
+						                </a>
+
+
+						            </li>
+                                    <li >
+						                <a href="{{ url_for('add') }}">
+						                    <i class="fa fa-plus-circle" style="width:24px"></i>
+						                    <span class="menu-title">新增事故案例</span>
+
+						                </a>
+
+
+						            </li>
+                                    <li >
+						                <a href="{{ url_for('find') }}">
+						                    <i class="fa fa-search-plus" style="width:24px"></i>
+						                    <span class="menu-title">相似案例检索辅助决策</span>
+
+						                </a>
+
+
+						            </li>
+                                    <li >
+						                <a href="{{ url_for('solution') }}">
+						                    <i class="fa fa-user-plus" style="width:24px"></i>
+						                    <span class="menu-title">案例重用</span>
+
+						                </a>
+
+
+						            </li>
+
+                                </ul>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <!--================================-->
+                    <!--End menu-->
+
+                </div>
+            </nav>
+            <!--===================================================-->
+            <!--END MAIN NAVIGATION-->
+
+        </div>
+
+        <!-- FOOTER -->
+        <!--===================================================-->
+        <footer id="footer">
+
+           <p class="pad-lft">Copyright&#0169; 2023 蔡永刚  &nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;All Rights Reserved </p>
+
+        </footer>
+        <!--===================================================-->
+        <!-- END FOOTER -->
+
+        <!-- SCROLL PAGE BUTTON -->
+        <!--===================================================-->
+        <button class="scroll-top btn">
+            <i class="pci-chevron chevron-up"></i>
+        </button>
+        <!--===================================================-->
+    </div>
+
+    </div>
+
+<script>
+        function fetchData() {
+            fetch('/get_solution')  // 发起请求到后端的路由 '/get_data'
+                .then(response => response.json())
+        .then(data => {
+            // 处理返回的数据，将结果添加到表格中
+            const resultTable = document.getElementById('result_table');
+            resultTable.innerHTML = '';  // 清空表格内容
+
+            // 添加表头
+            const headerRow = document.createElement('tr');
+            const nameHeader = document.createElement('th');
+            const timeHeader = document.createElement('th');
+            const pleaceHeader = document.createElement('th');
+            const solutionHeader = document.createElement('th');
+            const solutionchainHeader = document.createElement('th');
+            const xsdHeader = document.createElement('th');
+
+            nameHeader.textContent = '事故名称';
+            timeHeader.textContent = '事故具体时间';
+            pleaceHeader.textContent = '事故具体地点';
+            solutionHeader.textContent = '事故响应措施';
+            solutionchainHeader.textContent = '事故响应链';
+            xsdHeader.textContent = '总相似度';
+
+            headerRow.appendChild(nameHeader);
+            headerRow.appendChild(timeHeader);
+            headerRow.appendChild(pleaceHeader);
+            headerRow.appendChild(solutionHeader);
+            headerRow.appendChild(solutionchainHeader);
+            headerRow.appendChild(xsdHeader);
+            resultTable.appendChild(headerRow);
+
+            data.forEach(item => {
+                const row = document.createElement('tr');
+                const nameCell = document.createElement('td');
+                const timeCell = document.createElement('td');
+                const pleaceCell = document.createElement('td');
+                const solutionCell = document.createElement('td');
+                const solutionchainCell = document.createElement('td');
+                const xsdCell = document.createElement('td');
+
+                nameCell.textContent = item['事故名称'];
+                timeCell.textContent = item['事故具体时间'];
+                pleaceCell.textContent = item['事故具体地点'];
+                solutionCell.textContent = item['事故响应措施'];
+                solutionchainCell.textContent = item['事故响应链'];
+                xsdCell.textContent = item['总相似度'];
+
+                row.appendChild(nameCell);
+                row.appendChild(timeCell);
+                row.appendChild(pleaceCell);
+                row.appendChild(solutionCell);
+                row.appendChild(solutionchainCell);
+                row.appendChild(xsdCell);
+                resultTable.appendChild(row);
+            });
+
+            // 显示结果区域
+            const resultDiv = document.getElementById('result_div');
+            resultDiv.style.display = 'block';
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
+
+    // 监听表单提交事件
+        document.getElementById('myForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // 阻止表单默认提交行为
+
+            // 发送AJAX请求到后端
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/solution/submit_form');
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    // 提交成功，显示弹窗
+                    alert('提交成功！');
+                } else {
+                    alert('提交失败，请重试！');
+                }
+            };
+
+            // 获取表单数据
+            var formData = new FormData(document.getElementById('myForm'));
+            var params = new URLSearchParams(formData).toString();
+
+            // 发送请求
+            xhr.send(params);
+        });
+    </script>
+</body>
+</html>

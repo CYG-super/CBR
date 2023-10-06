@@ -1,0 +1,82 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../static/images/logo.jpeg">
+    <title>开启探索-登录</title>
+
+
+    <!--Bootstrap Stylesheet [ REQUIRED ]-->
+    <link href="../static/bootstrap/bootstrap.4.6.min.css" rel="stylesheet">
+<style type="text/css">
+	#container {
+    background: url("../static/images/bg-3.png");
+    background-position: 100% 100%;
+    background-size: cover;
+    height: 100vh;
+    width: 100%;
+    margin: 0;
+}
+</style>
+</head>
+
+<body style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh;">
+    <div id="container" class="cls-container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container" style="height: 30px">
+            <img src="{{ url_for('static',filename = 'images/logo.jpeg') }}" style="max-width:5%;max-height:5%;position: fixed;left: 10px">
+            <a class="navbar-brand" href="{{ url_for('index')}}" style="position:fixed;left: 60px">基于案例推理的桥梁运营事故决策系统</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent" style="position: fixed;right: 20px;color: white">
+                <ul class="navbar-nav" >
+                  {% if user %}
+                    <li class="nav-item">
+                      <span class="nav-link">{{ user.username }}</span>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('auth.logout') }}">退出登录</a>
+                    </li>
+                  {% else %}
+                    <li class="nav-item">
+                      <a class="nav-link" href="{{ url_for('auth.login') }}">登录</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('auth.register') }}">注册</a>
+                    </li>
+                  {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="row mt-4">
+            <div class="col"></div>
+            <div class="col" style="margin-top: 200px">
+                <form method="POST" style="color: white;font-size: 20px;position: fixed;height: 200px;width: 350px;margin-left: 100px">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">邮箱</label>
+                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">密码</label>
+                        <input type="password" name="password" class="form-control" id="exampleInputPassword1">
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-block">立即登录</button>
+                    </div>
+                </form>
+            </div>
+            <div class="col"></div>
+        </div>
+ <div style="position: fixed; bottom: 10px; left: 50%; transform: translateX(-50%); text-align: center;">
+    <p id="foot" class="pad-lft" style="color: white; font-size: 20px; margin-bottom: 0px;">
+        Copyright&#0169; 2023 蔡永刚
+        &nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;All Rights Reserved
+    </p>
+</div>
+</div>
+</body>
+
+</html>

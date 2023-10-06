@@ -1,0 +1,148 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../static/images/logo.jpeg">
+    <title>开启探索-注册</title>
+
+
+    <!--Bootstrap Stylesheet [ REQUIRED ]-->
+    <link href="../static/bootstrap/bootstrap.4.6.min.css" rel="stylesheet">
+    <script src="{{ url_for('static', filename='jquery/jquery.3.6.min.js') }}"></script>
+<style type="text/css">
+	#container {
+    background: url("../static/images/bg-3.png");
+    background-position: 100% 100%;
+    background-size: cover;
+    height: 100vh;
+    width: 100%;
+    margin: 0;
+}
+</style>
+</head>
+
+<body>
+<div id="container" class="cls-container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container" style="height: 30px">
+            <img src="{{ url_for('static',filename = 'images/logo.jpeg') }}" style="max-width:5%;max-height:5%;position: fixed;left: 10px">
+            <a class="navbar-brand" href="{{ url_for('index')}}" style="position:fixed;left: 60px">基于案例推理的桥梁运营事故决策系统</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent" style="position: fixed;right: 20px;color: white">
+                <ul class="navbar-nav" >
+                  {% if user %}
+                    <li class="nav-item">
+                      <span class="nav-link">{{ user.username }}</span>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('auth.logout') }}">退出登录</a>
+                    </li>
+                  {% else %}
+                    <li class="nav-item">
+                      <a class="nav-link" href="{{ url_for('auth.login') }}">登录</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('auth.register') }}">注册</a>
+                    </li>
+                  {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="row mt-4">
+            <div class="col"></div>
+            <div class="col" style ="color: white;font-size: 20px;height: 200px;width: 350px;margin-top: 100px" >
+                <form method="POST">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">邮箱</label>
+                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email">
+                        <small id="emailHelp"  style="color: white">我们不会把邮箱用于其他用户</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">验证码</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="captcha">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button" id="captcha-btn" style="color: white">获取验证码</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">用户名</label>
+                        <input type="text" class="form-control" name="username">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">密码</label>
+                        <input type="password" class="form-control" id="exampleInputPassword1" name="password">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">确认密码</label>
+                        <input type="password" class="form-control" name="password_confirm">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">立即注册</button>
+                </form>
+            </div>
+            <div class="col"></div>
+        </div>
+<div style="position: fixed; bottom: 10px; left: 50%; transform: translateX(-50%); text-align: center;">
+    <p id="foot" class="pad-lft" style="color: white; font-size: 20px; margin-bottom: 0px;">
+        Copyright&#0169; 2023 蔡永刚
+        &nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;All Rights Reserved
+    </p>
+</div>
+</div>
+<script>
+    function bindEmailCaptchaClick(){
+  $("#captcha-btn").click(function (event){
+    // $this：代表的是当前按钮的jquery对象
+    var $this = $(this);
+    // 阻止默认的事件
+    event.preventDefault();
+
+    var email = $("input[name='email']").val();
+    $.ajax({
+      // http://127.0.0.1:500
+      // /auth/captcha/email?email=xx@qq.com
+      url: "/auth/captcha/email?email="+email,
+      method: "GET",
+      success: function (result){
+        var code = result['code'];
+        if(code == 200){
+          var countdown = 5;
+          // 开始倒计时之前，就取消按钮的点击事件
+          $this.off("click");
+          var timer = setInterval(function (){
+            $this.text(countdown);
+            countdown -= 1;
+            // 倒计时结束的时候执行
+            if(countdown <= 0){
+              // 清掉定时器
+              clearInterval(timer);
+              // 将按钮的文字重新修改回来
+              $this.text("获取验证码");
+              // 重新绑定点击事件
+              bindEmailCaptchaClick();
+            }
+          }, 1000);
+          // alert("邮箱验证码发送成功！");
+        }else{
+          alert(result['message']);
+        }
+      },
+      fail: function (error){
+        console.log(error);
+      }
+    })
+  });
+}
+
+
+// 整个网页都加载完毕后再执行的
+$(function (){
+  bindEmailCaptchaClick();
+});
+</script>
+</body>
+</html>
